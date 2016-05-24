@@ -3,7 +3,7 @@
 Stack:
 
  - Ruby on Rails 4.2.4
- - Ruby 2.2.3
+ - Ruby 2.2.2
  - PostgreSQL
 
 Authors:

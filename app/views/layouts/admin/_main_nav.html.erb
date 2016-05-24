@@ -1,0 +1,23 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#baseapp-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <%= link_to "Base Application", admin_path, :class => "navbar-brand" %>
+    </div>
+
+
+    <div class="collapse navbar-collapse" id="baseapp-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><%= link_to("Users", admin_users_path) %></li>
+        <li><%= link_to("Exit →", root_path) %></li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
