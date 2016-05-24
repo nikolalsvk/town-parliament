@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-BaseApp::Application.load_tasks
+TownParliament::Application.load_tasks
