@@ -6,4 +6,22 @@ class ApplicationController < ActionController::Base
     return true
   end
 
+  def citizen_only
+    unless current_user.citizen?
+      redirect_to :back, :alert => "Access denied."
+    end
+  end
+
+  def alderman_only
+    unless current_user.alderman?
+      redirect_to :back, :alert => "Access denied."
+    end
+  end
+
+  def assembly_president_only
+    unless current_user.assembly_president?
+      redirect_to :back, :alert => "Access denied."
+    end
+  end
+
 end
