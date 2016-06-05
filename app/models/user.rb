@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # will citizen role be a default one?
   #   how will we add other roles to users?
-  #   Should addmin add those roles?
+  #   Should admin add those roles?
   after_create :add_citizen_role
 
   # Include default devise modules. Others available are:
@@ -75,7 +75,7 @@ class User < ActiveRecord::Base
     role?(:assembly_president)
   end
 
-  # FACEBOOK TUFF
+  # FACEBOOK STUFF
 
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token['info']
