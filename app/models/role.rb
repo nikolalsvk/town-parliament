@@ -6,4 +6,15 @@ class Role < ActiveRecord::Base
     find_or_create_by(:name => "admin")
   end
 
+  def self.citizen
+    find_or_create_by(:name => "citizen")
+  end
+
+  def self.alderman
+    find_or_create_by(:name => "alderman")
+  end
+
+  def self.assembly_president
+    find_or_create_by(:name => "assembly_president")
+  end
 end
