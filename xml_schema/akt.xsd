@@ -1,105 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://ftn.uns.ac.rs/xml" attributeFormDefault="unqualified"
-    xmlns="http://ftn.uns.ac.rs/xml">
+  targetNamespace="http://ftn.uns.ac.rs/xml" attributeFormDefault="unqualified"
+  xmlns="http://ftn.uns.ac.rs/xml">
 
-    <xs:element name="akt">
-        <xs:complexType>
+  <xs:element name="akt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="1" minOccurs="1" name="preambula" type="xs:string"/>
+        <xs:element name="uvodnidio">
+          <xs:complexType mixed="false">
             <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="1" name="preambula" type="xs:string"/>
-                <xs:element name="uvodnidio">
-                    <xs:complexType mixed="false">
-                        <xs:sequence>
-                            <xs:element ref="glava" maxOccurs="unbounded"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="glavnidio">
-                    <xs:complexType mixed="false">
-                        <xs:sequence>
-                            <xs:element ref="glava"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="zavrsnidio">
-                    <xs:complexType mixed="false">
-                        <xs:sequence>
-                            <xs:element ref="glava"/>
-                        </xs:sequence>
-                    </xs:complexType>
-                </xs:element>
+              <xs:element ref="glava" maxOccurs="unbounded"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="glavnidio">
+          <xs:complexType mixed="false">
+            <xs:sequence>
+              <xs:element ref="glava"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="zavrsnidio">
+          <xs:complexType mixed="false">
+            <xs:sequence>
+              <xs:element ref="glava"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="naziv" type="xs:string" use="required"/>
+      <xs:attribute name="drzava" type="xs:string" use="required"/>
+      <xs:attribute name="grad" type="xs:string" use="required"/>
+      <xs:attribute name="datum" type="xs:date" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="odredba">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="predmet" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="clan" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="naziv" type="xs:string" use="required"/>
-            <xs:attribute name="drzava" type="xs:string" use="required"/>
-            <xs:attribute name="grad" type="xs:string" use="required"/>
-            <xs:attribute name="datum" type="xs:date" use="required"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="odredba">
-        <xs:complexType>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="definicija" minOccurs="0" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="Naziv" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="clan">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element name="stav" maxOccurs="unbounded">
+          <xs:complexType mixed="true">
             <xs:sequence>
-                <xs:element name="predmet" maxOccurs="unbounded">
-                    <xs:complexType>
-                        <xs:sequence>
-                            <xs:element ref="clan" maxOccurs="unbounded"/>
-                        </xs:sequence>
-                        <xs:attribute name="naziv" type="xs:string" use="required"/>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="definicija" minOccurs="0" type="xs:string"/>
-            </xs:sequence>
-            <xs:attribute name="Naziv" type="xs:string" use="required"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="clan">
-        <xs:complexType mixed="true">
-            <xs:sequence>
-                <xs:element name="stav" maxOccurs="unbounded">
-                    <xs:complexType mixed="true">
-                        <xs:sequence>
-                            <xs:element ref="tacka" maxOccurs="unbounded" minOccurs="1"/>
-                            <xs:element name="sadrzaj" type="xs:string"/>
-                        </xs:sequence>
-                        <xs:attribute name="naziv" type="xs:string" use="required"/>
-                    </xs:complexType>
-                </xs:element>
+              <xs:element ref="tacka" maxOccurs="unbounded" minOccurs="1"/>
+              <xs:element name="sadrzaj" type="xs:string"/>
             </xs:sequence>
             <xs:attribute name="naziv" type="xs:string" use="required"/>
-        </xs:complexType>
-    </xs:element>
-    <xs:element name="tacka">
-        <xs:complexType mixed="true">
-            <xs:sequence>
-                <xs:element ref="podtacka" maxOccurs="unbounded" minOccurs="1"/>
-                <xs:element name="sadrzaj" type="xs:string"/>
-            </xs:sequence>
-            <xs:attribute name="naziv" type="xs:string" use="required"/>
-        </xs:complexType>
-    </xs:element>
-      <xs:element name="podtacka">
-        <xs:complexType mixed="true">
-            <xs:sequence>
-                <xs:element name="alineja" maxOccurs="unbounded" minOccurs="1">
-                    <xs:complexType>
-                        <xs:simpleContent>
-                            <xs:extension base="xs:string">
-                                <xs:attribute name="Naziv" type="xs:string"/>
-                            </xs:extension>
-                        </xs:simpleContent>
-                    </xs:complexType>
-                </xs:element>
-                <xs:element name="sadrzaj" type="xs:string"/>
-            </xs:sequence>
-            <xs:attribute name="naziv" type="xs:string" use="required"/>
-        </xs:complexType>
-    </xs:element>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="naziv" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="tacka">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element ref="podtacka" maxOccurs="unbounded" minOccurs="1"/>
+        <xs:element name="sadrzaj" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="naziv" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="podtacka">
+    <xs:complexType mixed="true">
+      <xs:sequence>
+        <xs:element name="alineja" maxOccurs="unbounded" minOccurs="1">
+          <xs:complexType>
+            <xs:simpleContent>
+              <xs:extension base="xs:string">
+                <xs:attribute name="Naziv" type="xs:string"/>
+              </xs:extension>
+            </xs:simpleContent>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="sadrzaj" type="xs:string"/>
+      </xs:sequence>
+      <xs:attribute name="naziv" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
 
-    <xs:element name="glava">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="odredba" maxOccurs="unbounded"/>
-            </xs:sequence>
-            <xs:attribute name="naziv" type="xs:string" use="required"/>
-        </xs:complexType>
-    </xs:element>
+  <xs:element name="glava">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="odredba" maxOccurs="unbounded"/>
+      </xs:sequence>
+      <xs:attribute name="naziv" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
