@@ -1,5 +1,6 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Subject, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:regulation) }
+  it { should have_many(:clauses) }
 end

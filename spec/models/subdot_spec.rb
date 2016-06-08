@@ -1,5 +1,6 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Subdot, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:dot) }
+  it { should have_many(:paragraphs) }
 end
