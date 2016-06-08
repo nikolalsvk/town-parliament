@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Admin::UsersController do
+describe Admin::UsersController, :type => :controller do
 
-  let(:user) { mock_model(User) }
+  let(:user) { double(User, :id => 2) }
 
   before do
     controller.stub(:current_user).and_return(user)
@@ -106,20 +106,21 @@ describe Admin::UsersController do
   describe "POST 'destroy'" do
 
     before do
-      User.should_receive(:find).and_return(user)
+      expect(User).to receive(:find).and_return(user)
+      expect(user).to receive(:destroy).and_return(true)
     end
 
     it "redirects to users list" do
       delete "destroy", :id => user.id
 
-      response.should redirect_to(admin_users_path)
-      flash[:notice].should_not be_nil
+      expect(response).to redirect_to(admin_users_path)
+      expect(flash[:notice]).to_not be_nil
     end
 
     it "sets notice on successful destroy" do
       delete 'destroy', :id => user.id
 
-      flash[:notice].should_not be_nil
+      expect(flash[:notice]).to_not be_nil
     end
 
   end

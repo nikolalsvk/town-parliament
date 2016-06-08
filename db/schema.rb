@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160608122152) do
 
   create_table "heads", force: :cascade do |t|
     t.string   "name"
+    t.string   "type"
     t.integer  "act_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

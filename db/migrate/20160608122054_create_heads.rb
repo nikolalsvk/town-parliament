@@ -2,6 +2,7 @@ class CreateHeads < ActiveRecord::Migration
   def change
     create_table :heads do |t|
       t.string :name
+      t.string :type
 
       t.belongs_to :act, :index => true
 
