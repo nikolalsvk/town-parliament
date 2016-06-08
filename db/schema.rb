@@ -11,10 +11,68 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20110415110329) do
+ActiveRecord::Schema.define(version: 20160608122152) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "acts", force: :cascade do |t|
+    t.string   "preambula"
+    t.string   "name"
+    t.string   "state"
+    t.string   "city"
+    t.date     "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "clauses", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "clauses", ["subject_id"], name: "index_clauses_on_subject_id", using: :btree
+
+  create_table "dots", force: :cascade do |t|
+    t.text     "content"
+    t.string   "name"
+    t.integer  "stance_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "dots", ["stance_id"], name: "index_dots_on_stance_id", using: :btree
+
+  create_table "heads", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "act_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "heads", ["act_id"], name: "index_heads_on_act_id", using: :btree
+
+  create_table "paragraphs", force: :cascade do |t|
+    t.text     "content"
+    t.string   "name"
+    t.integer  "subdot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "paragraphs", ["subdot_id"], name: "index_paragraphs_on_subdot_id", using: :btree
+
+  create_table "regulations", force: :cascade do |t|
+    t.string   "name"
+    t.text     "definition"
+    t.integer  "head_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "regulations", ["head_id"], name: "index_regulations_on_head_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -26,6 +84,35 @@ ActiveRecord::Schema.define(version: 20110415110329) do
     t.integer "role_id"
     t.integer "user_id"
   end
+
+  create_table "stances", force: :cascade do |t|
+    t.text     "content"
+    t.string   "name"
+    t.integer  "clause_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "stances", ["clause_id"], name: "index_stances_on_clause_id", using: :btree
+
+  create_table "subdots", force: :cascade do |t|
+    t.text     "content"
+    t.string   "name"
+    t.integer  "dot_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "subdots", ["dot_id"], name: "index_subdots_on_dot_id", using: :btree
+
+  create_table "subjects", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "regulation_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "subjects", ["regulation_id"], name: "index_subjects_on_regulation_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

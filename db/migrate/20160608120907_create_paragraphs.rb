@@ -4,6 +4,8 @@ class CreateParagraphs < ActiveRecord::Migration
       t.text :content
       t.string :name
 
+      t.belongs_to :subdot, :index => true
+
       t.timestamps null: false
     end
   end
