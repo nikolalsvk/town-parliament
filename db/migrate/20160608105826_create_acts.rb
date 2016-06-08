@@ -7,6 +7,8 @@ class CreateActs < ActiveRecord::Migration
       t.string :city
       t.date :date
 
+      t.belongs_to :user, :index => true
+
       t.timestamps null: false
     end
   end

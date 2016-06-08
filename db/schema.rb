@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160608122152) do
+ActiveRecord::Schema.define(version: 20160608180712) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,35 @@ ActiveRecord::Schema.define(version: 20160608122152) do
     t.string   "state"
     t.string   "city"
     t.date     "date"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  add_index "acts", ["user_id"], name: "index_acts_on_user_id", using: :btree
+
+  create_table "amandman", force: :cascade do |t|
+    t.date     "date"
+    t.string   "type"
+    t.text     "content"
+    t.integer  "clause_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "amandman", ["clause_id"], name: "index_amandman_on_clause_id", using: :btree
+  add_index "amandman", ["user_id"], name: "index_amandman_on_user_id", using: :btree
+
+  create_table "amandments", force: :cascade do |t|
+    t.date     "date"
+    t.string   "type"
+    t.text     "content"
+    t.text     "explanation"
+    t.integer  "clause_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "clauses", force: :cascade do |t|
