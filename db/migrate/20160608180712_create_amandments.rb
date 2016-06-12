@@ -6,7 +6,7 @@ class CreateAmandments < ActiveRecord::Migration
       t.text :content
       t.text :explanation
 
-      t.belongs_to :clause
+      t.references :owner, :polymorphic => true, :index => true
       t.belongs_to :user
 
       t.timestamps null: false

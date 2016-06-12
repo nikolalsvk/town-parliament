@@ -47,11 +47,14 @@ ActiveRecord::Schema.define(version: 20160608180712) do
     t.string   "type"
     t.text     "content"
     t.text     "explanation"
-    t.integer  "clause_id"
+    t.integer  "owner_id"
+    t.string   "owner_type"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "amandments", ["owner_type", "owner_id"], name: "index_amandments_on_owner_type_and_owner_id", using: :btree
 
   create_table "clauses", force: :cascade do |t|
     t.string   "name"
