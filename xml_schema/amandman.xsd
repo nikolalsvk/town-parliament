@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
-    targetNamespace="http://ftn.uns.ac.rs/xml" attributeFormDefault="unqualified"
-    xmlns="http://ftn.uns.ac.rs/xml">
-    <xs:import namespace="http://www.ftn.uns.ac.rs/XML" schemaLocation="akt.xsd"/>
-    <xs:element name="amandman">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="obrazlozenje" type="xs:string"/>
-                <xs:element ref="clan"/>
-            </xs:sequence>
-            <xs:attribute name="datum" type="xs:date"/>
-            <xs:attribute name="idclana" type="xs:string" use="required"/>
-            <xs:attribute name="vrstaAmandmana">
-                <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                        <xs:enumeration value="insert"/>
-                        <xs:enumeration value="update"/>
-                        <xs:enumeration value="delete"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-        </xs:complexType>
-    </xs:element>
+  targetNamespace="http://ftn.uns.ac.rs/xml" attributeFormDefault="unqualified"
+  xmlns="http://ftn.uns.ac.rs/xml">
+  <xs:import namespace="http://www.ftn.uns.ac.rs/XML" schemaLocation="akt.xsd"/>
+  <xs:element name="amandman">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="obrazlozenje" type="xs:string"/>
+        <xs:element ref="clan"/>
+      </xs:sequence>
+      <xs:attribute name="datum" type="xs:date"/>
+      <xs:attribute name="idclana" type="xs:string" use="required"/>
+      <xs:attribute name="vrstaAmandmana">
+        <xs:simpleType>
+          <xs:restriction base="xs:token">
+            <xs:enumeration value="insert"/>
+            <xs:enumeration value="update"/>
+            <xs:enumeration value="delete"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
