@@ -22,6 +22,9 @@ gem 'kaminari'
 gem 'ransack'
 gem 'dynamic_form'
 
+# MarkLogic ActiveDocument
+gem 'activedocument'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'awesome_print'
