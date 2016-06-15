@@ -51,7 +51,7 @@ class Transform::ToXml
       }
     end
 
-    puts builder.to_xml
+    @akt = builder.to_xml
   end
 
   def alineja(subdot)
