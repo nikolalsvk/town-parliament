@@ -15,7 +15,26 @@
     <div class="collapse navbar-collapse" id="baseapp-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
-          <li><%= link_to"Acts", pages_acts_path %></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" type="button" data-toggle="dropdown">Acts
+                  <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><%= link_to "All Acts", pages_acts_path %></li>
+                  <li><a href="#">New act</a></li>
+                </ul>
+            </li>
+
+            <% if !current_user.citizen? %>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" type="button" data-toggle="dropdown">Amandments
+                    <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">All Amandments</a></li>
+                    <li><a href="#">New Amandment</a></li>
+                  </ul>
+                </li>
+            <% end %>
+
           <li><%= link_to "Account settings", edit_user_registration_path %></li>
           <% if current_user.admin? %>
             <li><%= link_to "Admin", admin_path %></li>
