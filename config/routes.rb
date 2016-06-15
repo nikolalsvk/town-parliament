@@ -13,7 +13,7 @@ TownParliament::Application.routes.draw do
 
   end
 
-  resources :acts
+  resources :acts, :amandments
 
   root :to => "pages#index"
 
