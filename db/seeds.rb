@@ -17,9 +17,9 @@ Role.create!(name: 'assembly_president')
 	@head = Head.create(:act => @act, :name => "test_head")
 	3.times do |regulation|
 		@regulation = Regulation.create(:head => @head)
-    3.times do |subject|
-      @subject = Subject.create(:regulation => @regulation)
-    end
+		3.times do |subject|
+			@subject = Subject.create(:regulation => @regulation)
+		end
 	end
 end
 @act.save
