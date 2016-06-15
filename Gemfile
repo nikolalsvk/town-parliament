@@ -39,6 +39,7 @@ group :development do
   gem 'chronic'
   gem 'admin_view'
   gem 'better_errors'
+  gem 'annotate'
 end
 
 group :test do
