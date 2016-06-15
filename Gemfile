@@ -54,3 +54,7 @@ end
 group :production, :development do
   gem 'thin'
 end
+
+group :production do
+  gem 'rails_12factor'
+end
