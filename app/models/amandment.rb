@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: amandments
+#
+#  id          :integer          not null, primary key
+#  date        :date
+#  type        :string
+#  content     :text
+#  explanation :text
+#  owner_id    :integer
+#  owner_type  :string
+#  user_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
 class Amandment < ActiveRecord::Base
   TYPE = ["wait", "accepted", "declined"]
 
