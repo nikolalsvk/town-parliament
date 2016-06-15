@@ -24,6 +24,7 @@ gem 'dynamic_form'
 
 # Resolving TZinfo Windows error
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+gem 'binding_of_caller'
 # MarkLogic ActiveDocument
 gem 'activedocument'
 

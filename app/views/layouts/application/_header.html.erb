@@ -15,6 +15,7 @@
     <div class="collapse navbar-collapse" id="baseapp-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <% if user_signed_in? %>
+          <li><%= link_to"Acts", pages_acts_path %></li>
           <li><%= link_to "Account settings", edit_user_registration_path %></li>
           <% if current_user.admin? %>
             <li><%= link_to "Admin", admin_path %></li>
