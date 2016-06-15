@@ -23,7 +23,7 @@ class ActsController < ApplicationController
 
   # GET /acts/new
   def new
-    @act = Act.new
+    @act ||= build_act
   end
 
   # GET /acts/1/edit
@@ -35,6 +35,7 @@ class ActsController < ApplicationController
     @act = Act.new(act_params)
 
     if @act.save
+
       redirect_to @act, notice: 'Act was successfully created.'
     else
       render :new
@@ -60,21 +61,34 @@ class ActsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_act
-      @act = Act.find(params[:id])
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_act
+    @act = Act.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def act_params
-      params[:act]
-    end
+  # Only allow a trusted parameter "white list" through.
+  def act_params
+    params.require(:act).permit(:state, :name, :city, :date, :preambula)  
+  end
 
-    def to_s
+  def to_s
     if @document
       @document.to_xml(:save_with => Nokogiri::XML::Node::SaveOptions::NO_DECLARATION)
     else
       super.to_s
     end
+  end
+  
+  def build_act 
+    session[:act] = Act.new
+  end
+
+  def current_act
+    @act = session[:act]
+  end
+
+  def purge_act
+    session[:act] = nil
   end
 end
