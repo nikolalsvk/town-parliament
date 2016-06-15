@@ -1,7 +1,7 @@
 class CreateActs < ActiveRecord::Migration
   def change
     create_table :acts do |t|
-      t.string :preambula
+      t.text :preambula
       t.string :name
       t.string :state
       t.string :city
