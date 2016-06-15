@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+<h1>Act: <i><%= @akt.name %></i></h1>
+<h2>MarkLogic</h2>
+<h6><%= @act %></h6>
+
+
+<%= link_to('<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_act_path(@act)) %>
+<%= link_to('<button type="button" class="btn btn-success">Back</button>'.html_safe, acts_path) %>

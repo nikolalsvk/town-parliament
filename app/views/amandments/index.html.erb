@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Amandments</h1>
+
+<table>
+  <thead>
+    <th style="width: 70%">Amandment name</th>
+    <th style="width: 5%">Show</th>
+    <th style="width: 5%">Destroy</th>
+  </thead>
+
+  <tbody>
+    <% @amandments.each do |amandment| %>
+      <tr>
+        <td><%= amandment.name %></td>
+        <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, amandment) %></td>
+        <td><%= link_to('<button type="button" class="btn btn-danger">Destroy</button>'.html_safe, amandment, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to('<button type="button" class="btn btn-primary">New Amandment</button>'.html_safe, new_amandment_path) %>

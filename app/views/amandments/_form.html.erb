@@ -1,0 +1,17 @@
+<%= form_for(@amandment) do |f| %>
+  <% if @amandment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@amandment.errors.count, "error") %> prohibited this amandment from being saved:</h2>
+
+      <ul>
+      <% @amandment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
