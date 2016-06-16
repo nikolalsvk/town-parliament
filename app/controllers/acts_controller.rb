@@ -23,7 +23,7 @@ class ActsController < ApplicationController
 
   # GET /acts/new
   def new
-    @act ||= Act.new
+    @act = Act.new
   end
 
   # GET /acts/1/edit
@@ -42,9 +42,11 @@ class ActsController < ApplicationController
     end
   end
 
+  # HEAD STUFF
+
   def create_head_intro
     @head = Head.create(category: params[:head][:category], 
-                name: params[:head][:name])    
+                        name: params[:head][:name])    
     respond_to do |format|
       format.js
     end
@@ -53,6 +55,32 @@ class ActsController < ApplicationController
   def destroy_head
     # destroy heds here
     Head.find_by_id(params[:id]).destroy
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # REGULATION STUFF
+
+  def prepare_regulation
+    @head = Head.find_by_id(params[:id])
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_regulation
+    @regulation = Regulation.create(name: params[:regulation][:name],
+                                    definition: params[:regulation][:definition],
+                                    head_id: params[:regulation][:head_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_regulation
+    Regulation.find_by_id(params[:id]).destroy
     respond_to do |format|
       format.js
     end
