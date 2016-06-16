@@ -40,7 +40,9 @@
           <% if current_user.assembly_president? %>
             <li><%= link_to "Session", pages_meeting_path %></li>
           <% end %>
+      </ul>
 
+      <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Account settings", edit_user_registration_path %></li>
 
           <% if current_user.admin? %>

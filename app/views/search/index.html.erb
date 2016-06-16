@@ -1,12 +1,15 @@
-<%= form_tag perform_search_path, method: "get" do %>
-  <%= label_tag(:search, "Search for:") %>
-  <%= text_field_tag(:search) %>
-  <%= submit_tag("Search") %>
+<%= form_tag perform_search_path, method: "get", :class => "form-inline" do %>
+
+  <div class="form-group">
+    <%= label_tag(:search, "Search for:") %>
+    <%= text_field_tag(:search, nil, :class => "form-control") %>
+  </div>
+
+  <%= submit_tag("Search", :class => "btn btn-default") %>
 <% end %>
 
-<% if @result.empty? && params[:search] %>
-  <h3>Sorry, there we're no results :(</h3>
-<% else %>
+<% if @result.present? %>
+
   <h3>Search results</h3>
   <p>Current string is inside these Acts:</p>
 
@@ -28,5 +31,12 @@
     <% end %>
     </tbody>
   </table>
+
+
+<% else %>
+
+  <% if params[:search] %>
+    <h3>Sorry, there we're no results :(</h3>
+  <% end %>
 
 <% end %>
