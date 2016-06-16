@@ -95,3 +95,7 @@ end
   end
 end
 @act.save
+
+Searchable.create_indexes
+
+Searchable.import_data

@@ -19,14 +19,18 @@ gem 'devise', '~> 3.4.0'
 
 gem 'omniauth-facebook'
 gem 'kaminari'
-gem 'ransack'
 gem 'dynamic_form'
 
 # Resolving TZinfo Windows error
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'binding_of_caller'
+
 # MarkLogic ActiveDocument
 gem 'activedocument'
+
+# Elasticsearch
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 
 group :test, :development do
   gem 'rspec-rails'

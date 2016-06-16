@@ -7,9 +7,7 @@ TownParliament::Application.routes.draw do
   get "/admin" => "admin/base#index", :as => "admin"
 
   namespace "admin" do
-
     resources :users
-
   end
 
   resources :acts, :amandments
@@ -27,5 +25,8 @@ TownParliament::Application.routes.draw do
   delete '/destroy_subject', to: 'acts#destroy_subject'
 
   root :to => "pages#index"
+
+  get :search, to: 'search#index'
+  get :perform_search, to: 'search#perform'
 
 end

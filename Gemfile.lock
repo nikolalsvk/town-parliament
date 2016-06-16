@@ -106,6 +106,19 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     dynamic_form (1.1.4)
+    elasticsearch (1.0.17)
+      elasticsearch-api (= 1.0.17)
+      elasticsearch-transport (= 1.0.17)
+    elasticsearch-api (1.0.17)
+      multi_json
+    elasticsearch-model (0.1.9)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
+    elasticsearch-rails (0.1.9)
+    elasticsearch-transport (1.0.17)
+      faraday
+      multi_json
     email_spec (2.1.0)
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
@@ -297,6 +310,8 @@ DEPENDENCIES
   database_cleaner
   devise (~> 3.4.0)
   dynamic_form
+  elasticsearch-model
+  elasticsearch-rails
   email_spec
   factory_girl_rails
   jquery-rails
@@ -307,7 +322,6 @@ DEPENDENCIES
   pry-byebug
   rails (= 4.2.4)
   rails_12factor
-  ransack
   rspec-rails
   selenium-webdriver
   shoulda

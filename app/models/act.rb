@@ -15,6 +15,9 @@
 #
 
 class Act < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # Akt
   belongs_to :user
 
