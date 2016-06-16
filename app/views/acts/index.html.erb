@@ -10,7 +10,7 @@
   </thead>
   <tbody>
     <% @acts.each do |act| %>
-    <% if act.status=="approved" %>
+    <% if act.status == "approved" %>
       <tr>
         <td><%= act.name %></td>
         <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, act) %></td>

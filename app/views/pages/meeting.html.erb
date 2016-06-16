@@ -14,7 +14,7 @@
   </thead>
   <tbody>
   <% @acts.each do |act| %>
-    <% if act.status!="approved" %>
+    <% if act.status != "approved" %>
       <tr>
         <td><%= act.name %></td>
         <td><input type="number" min="-100" max="100"></td>

@@ -4,11 +4,7 @@ class PagesController < ApplicationController
   end
   def meeting
     @meeting = Meeting.find(1)
-    if @meeting.status==false
-      @meeting.status=true
-    else
-      @meeting.status=false
-    end
+    @meeting.status = @meeting.status ? false : true
     @meeting.save
     @acts = Act.all
     @amandments = Amandment.all
