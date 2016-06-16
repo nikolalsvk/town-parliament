@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
   # ALDERMAN
 
   def make_alderman
-    make_citizen
+    revoke_citizen
     self.roles << Role.alderman
   end
 
@@ -82,7 +82,7 @@ class User < ActiveRecord::Base
   # ASSEMBLY PRESIDENT
 
   def make_assembly_president
-    make_alderman
+    revoke_citizen
     self.roles << Role.assembly_president
   end
 
@@ -108,7 +108,7 @@ class User < ActiveRecord::Base
   private
 
   def add_citizen_role
-    make_citizen    
+    make_citizen
   end
 
 end
