@@ -1,0 +1,38 @@
+<div class="modal fade" id="subject-modal-<%= @regulation.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><strong><h4>Predmet</h4></strong></div>
+        <div class="col-md-4"></div>
+      </div>
+      <%= form_for @regulation.subjects.build, url: create_subject_path, html: { class:"form-horizontal" }, remote: true do |fs| %>
+      <%= fs.hidden_field :regulation_id, value: @regulation.id %>
+      <div class="form-group">
+        <div clas="row">
+          <label class="col-md-4 control-label" ></label>
+           <div class="col-md-4">
+            <%= fs.text_field :name, class: "form-control input-md", placeholder: "Naziv",required: true %>
+          </div>
+        </div>
+      </div>
+
+      <!-- dugmad -->
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <span>
+            <%= fs.submit "Add Subject", class:"btn btn-danger" %>
+          </span>
+          <span>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+          </span>
+        </div>
+        <% end %>
+        <br>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
