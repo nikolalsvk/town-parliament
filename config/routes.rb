@@ -27,5 +27,6 @@ TownParliament::Application.routes.draw do
   root :to => "pages#index"
 
   get :search, to: 'search#index'
+  get :perform_search, to: 'search#perform'
 
 end

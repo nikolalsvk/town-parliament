@@ -14,4 +14,25 @@ class Searchable
     end
   end
 
+  def self.search(params)
+    results = Elasticsearch::Model.search(params, CLASSES)
+
+    acts = []
+
+    # Fill an array of acts with acts that contain search word
+    results.records.each do |res|
+      if res.class.to_s == "Act"
+        @act = res
+      else
+        object = res.class.name.constantize.find(res.id)
+
+        @act = object.act
+      end
+
+      acts << @act unless acts.include? @act
+    end
+
+    acts
+  end
+
 end

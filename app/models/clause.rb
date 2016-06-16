@@ -18,4 +18,9 @@ class Clause < ActiveRecord::Base
 
   has_many :stances, :dependent => :destroy
   has_many :amandments, :dependent => :destroy
+
+  def act
+    subject.act
+  end
+
 end

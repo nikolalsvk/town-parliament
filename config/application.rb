@@ -23,6 +23,8 @@ module TownParliament
     # config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = true
 
+    config.active_record.raise_in_transactional_callbacks = true
+
     # Enable the asset pipeline
     config.assets.enabled = true
 

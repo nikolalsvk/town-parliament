@@ -18,4 +18,9 @@ class Stance < ActiveRecord::Base
   belongs_to :clause
 
   has_many :dots, :dependent => :destroy
+
+  def act
+    clause.act
+  end
+
 end

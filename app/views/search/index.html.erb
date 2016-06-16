@@ -1,0 +1,32 @@
+<%= form_tag perform_search_path, method: "get" do %>
+  <%= label_tag(:search, "Search for:") %>
+  <%= text_field_tag(:search) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<% if @result.empty? && params[:search] %>
+  <h3>Sorry, there we're no results :(</h3>
+<% else %>
+  <h3>Search results</h3>
+  <p>Current string is inside these Acts:</p>
+
+  <table class="table table-striped">
+    <thead>
+      <th style="width: 70%">Act name</th>
+      <th style="width: 5%">Show</th>
+      <th style="width: 5%">Edit</th>
+    </thead>
+    <tbody>
+    <% @result.each do |act| %>
+
+      <tr>
+        <td><%= act.name %></td>
+        <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, act) %></td>
+        <td><%= link_to('<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_act_path(act)) %></td>
+      </tr>
+
+    <% end %>
+    </tbody>
+  </table>
+
+<% end %>
