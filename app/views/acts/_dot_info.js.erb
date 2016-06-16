@@ -3,5 +3,5 @@
 
   <%= link_to "Delete", destroy_dot_path(id: @dot.id), method:"delete", data: {confirm: "Are you sure?"}, class: "btn btn-danger",remote: true %>
 
-  <%= link_to "Add Podtacka", "#" , method:"post", class: "btn btn-primary", remote: true %>
+  <%= link_to "Add Podtacka", prepare_subdot_path(id: @dot.id) , method:"post", class: "btn btn-primary", remote: true %>
 </div>

@@ -1,0 +1,7 @@
+<div id="subdot-<%= @subdot.id %>">
+  Podtacka: <%= @subdot.name %> 
+
+  <%= link_to "Delete", destroy_subdot_path(id: @subdot.id), method:"delete", data: {confirm: "Are you sure?"}, class: "btn btn-danger",remote: true %>
+
+  <%= link_to "Add Paragraf", "#" , method:"post", class: "btn btn-primary", remote: true %>
+</div>
