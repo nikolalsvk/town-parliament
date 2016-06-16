@@ -1,0 +1,3 @@
+$('.modal-place').append("<%= j render(:partial => 'clause_modal') %>");
+$("#clause_name").val("");
+$('#clause-modal-<%= @subject.id %>').modal("toggle");

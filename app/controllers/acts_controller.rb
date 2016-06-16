@@ -1,4 +1,5 @@
 class ActsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_act, only: [:show, :edit, :update, :destroy]
 
   # GET /acts
@@ -106,6 +107,32 @@ class ActsController < ApplicationController
 
   def destroy_subject
     Subject.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # CLAUSE STUFF
+
+  def prepare_clause
+    @subject = Subject.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_clause
+    @clause = Clause.create(name: params[:clause][:name],
+                            subject_id: params[:clause][:subject_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_clause
+    Clause.find_by_id(params[:id]).destroy
 
     respond_to do |format|
       format.js
