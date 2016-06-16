@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616122706) do
+ActiveRecord::Schema.define(version: 20160616175616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,8 +42,10 @@ ActiveRecord::Schema.define(version: 20160616122706) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.string   "status"
+    t.integer  "act_id"
   end
 
+  add_index "amandments", ["act_id"], name: "index_amandments_on_act_id", using: :btree
   add_index "amandments", ["owner_type", "owner_id"], name: "index_amandments_on_owner_type_and_owner_id", using: :btree
 
   create_table "clauses", force: :cascade do |t|
@@ -159,4 +161,5 @@ ActiveRecord::Schema.define(version: 20160616122706) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "amandments", "acts"
 end
