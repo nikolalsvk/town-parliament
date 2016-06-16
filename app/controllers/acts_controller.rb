@@ -20,7 +20,7 @@ class ActsController < ApplicationController
 
   # GET /acts/new
   def new
-    @act ||= build_act
+    @act ||= Act.new
   end
 
   # GET /acts/1/edit
@@ -36,6 +36,22 @@ class ActsController < ApplicationController
       redirect_to @act, notice: 'Act was successfully created.'
     else
       render :new
+    end
+  end
+
+  def create_head_intro
+    @head = Head.create(category: params[:head][:category], 
+                name: params[:head][:name])    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_head
+    # destroy heds here
+    Head.find_by_id(params[:id]).destroy
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -75,17 +91,5 @@ class ActsController < ApplicationController
     else
       super.to_s
     end
-  end
-  
-  def build_act 
-    session[:act] = Act.new
-  end
-
-  def current_act
-    @act = session[:act]
-  end
-
-  def purge_act
-    session[:act] = nil
   end
 end

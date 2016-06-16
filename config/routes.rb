@@ -14,6 +14,8 @@ TownParliament::Application.routes.draw do
   end
 
   resources :acts, :amandments
+  post '/create_head_intro', to: 'acts#create_head_intro'
+  delete '/destroy_head', to:'acts#destroy_head'
 
   root :to => "pages#index"
 
