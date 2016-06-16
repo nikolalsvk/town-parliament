@@ -6,6 +6,7 @@ describe Admin::UsersController, :type => :controller do
 
   before do
     controller.stub(:current_user).and_return(user)
+    controller.stub(:authenticate_user!)
 
     user.should_receive(:admin?).and_return(true)
   end
