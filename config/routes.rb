@@ -34,6 +34,12 @@ TownParliament::Application.routes.draw do
   post '/create_stance', to: 'acts#create_stance'
   delete '/destroy_stance', to: 'acts#destroy_stance'
 
+  # DOT ROUTES
+  post '/prepare_dot', to: 'acts#prepare_dot'
+  post '/create_dot', to: 'acts#create_dot'
+  delete '/destroy_dot', to: 'acts#destroy_dot'
+
+
   root :to => "pages#index"
 
   get :search, to: 'search#index'

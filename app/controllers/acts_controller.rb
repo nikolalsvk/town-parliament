@@ -173,6 +173,34 @@ class ActsController < ApplicationController
     end
   end
 
+  # DOT STUFF
+
+  def prepare_dot
+    @stance = Stance.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_dot
+    @dot = Dot.create(name: params[:dot][:name],
+                      content: params[:dot][:content],
+                      stance_id: params[:dot][:stance_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_dot
+    Dot.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # PATCH/PUT /acts/1
   def update
     if @act.update(act_params)
