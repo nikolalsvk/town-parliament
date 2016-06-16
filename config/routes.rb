@@ -24,6 +24,11 @@ TownParliament::Application.routes.draw do
   post '/create_subject', to: 'acts#create_subject'
   delete '/destroy_subject', to: 'acts#destroy_subject'
 
+  # CLAUSE ROUTES
+  post '/prepare_clause', to: 'acts#prepare_clause'
+  post '/create_clause', to: 'acts#create_clause'
+  delete '/destroy_clause', to: 'acts#destroy_clause'
+
   root :to => "pages#index"
 
   get :search, to: 'search#index'
