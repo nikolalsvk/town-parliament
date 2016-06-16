@@ -1,0 +1,4 @@
+$('.modal-place').append("<%= j render(:partial => 'dot_modal') %>");
+$("#dot_name").val("");
+$("#dot_content").val("");
+$('#dot-modal-<%= @stance.id %>').modal("toggle");
