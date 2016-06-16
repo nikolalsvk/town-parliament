@@ -11,6 +11,8 @@ Role.create!(name: 'citizen')
 Role.create!(name: 'alderman')
 Role.create!(name: 'assembly_president')
 
+@meeting = Meeting.create(:status => false)
+@meeting.save
 
 @act = Act.create(:preambula => "preambula  akta", :name => "akt1")
 3.times do |head|
