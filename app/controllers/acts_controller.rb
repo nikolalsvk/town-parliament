@@ -35,9 +35,80 @@ class ActsController < ApplicationController
     @act = Act.new(act_params)
 
     if @act.save
+
       redirect_to @act, notice: 'Act was successfully created.'
     else
       render :new
+    end
+  end
+
+  # HEAD STUFF
+
+  def create_head_intro
+    @head = Head.create(category: params[:head][:category], 
+                        name: params[:head][:name])    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_head
+    # destroy heds here
+    Head.find_by_id(params[:id]).destroy
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # REGULATION STUFF
+
+  def prepare_regulation
+    @head = Head.find_by_id(params[:id])
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_regulation
+    @regulation = Regulation.create(name: params[:regulation][:name],
+                                    definition: params[:regulation][:definition],
+                                    head_id: params[:regulation][:head_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_regulation
+    Regulation.find_by_id(params[:id]).destroy
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # SUBJECT STUFF
+
+  def prepare_subject
+    @regulation = Regulation.find_by_id(params[:id])
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_subject
+    @subject = Subject.create(name: params[:subject][:name],
+                              regulation_id: params[:subject][:regulation_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_subject
+    Subject.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
     end
   end
 
@@ -60,17 +131,18 @@ class ActsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_act
-      @act = Act.find(params[:id])
-    end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_act
+    @act = Act.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def act_params
-      params[:act]
-    end
+  # Only allow a trusted parameter "white list" through.
+  def act_params
+    params.require(:act).permit(:state, :name, :city, :date, :preambula)  
+  end
 
-    def to_s
+  def to_s
     if @document
       @document.to_xml(:save_with => Nokogiri::XML::Node::SaveOptions::NO_DECLARATION)
     else

@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20160616122706) do
   enable_extension "plpgsql"
 
   create_table "acts", force: :cascade do |t|
-    t.string   "preambula"
+    t.text     "preambula"
     t.string   "name"
     t.string   "state"
     t.string   "city"
@@ -30,29 +30,17 @@ ActiveRecord::Schema.define(version: 20160616122706) do
 
   add_index "acts", ["user_id"], name: "index_acts_on_user_id", using: :btree
 
-  create_table "amandman", force: :cascade do |t|
-    t.date     "date"
-    t.string   "type"
-    t.text     "content"
-    t.integer  "clause_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "amandman", ["clause_id"], name: "index_amandman_on_clause_id", using: :btree
-  add_index "amandman", ["user_id"], name: "index_amandman_on_user_id", using: :btree
-
   create_table "amandments", force: :cascade do |t|
     t.date     "date"
-    t.string   "type"
+    t.string   "category",    default: "wait"
     t.text     "content"
     t.text     "explanation"
+    t.integer  "rating"
     t.integer  "owner_id"
     t.string   "owner_type"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.string   "status"
   end
 
@@ -79,7 +67,7 @@ ActiveRecord::Schema.define(version: 20160616122706) do
 
   create_table "heads", force: :cascade do |t|
     t.string   "name"
-    t.string   "type"
+    t.string   "category"
     t.integer  "act_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

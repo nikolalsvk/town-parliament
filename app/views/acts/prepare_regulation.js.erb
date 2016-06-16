@@ -1,0 +1,4 @@
+$('.modal-place').append("<%= j render(:partial => 'regulation_modal') %>");
+$("#regulation_name").val("");
+$("#regulation_definition").val("");
+$('#regulation-modal-<%= @head.id %>').modal("toggle");

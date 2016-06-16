@@ -1,0 +1,7 @@
+<div id="introduction-head-<%= @head.id %>">
+  Glava: <%= @head.name %> 
+
+  <%= link_to "Delete", destroy_head_path(id: @head.id), method:"delete", data: {confirm: "Are you sure?"}, class: "btn btn-danger",remote: true %>
+
+  <%= link_to "Add Odredba", prepare_regulation_path(id: @head.id), method:"post",class: "btn btn-primary", remote: true %>
+</div>
