@@ -1,5 +1,5 @@
 <div id="introduction-head-<%= @head.id %>">
-  <%= @head.name %> 
+  Glava: <%= @head.name %> 
 
   <%= link_to "Delete", destroy_head_path(id: @head.id), method:"delete", data: {confirm: "Are you sure?"}, class: "btn btn-danger",remote: true %>
 

@@ -1,0 +1,3 @@
+$("#subject-modal-<%= @subject.regulation_id %>").modal('toggle');
+$("#subject_name").val("");
+$('#regulation-<%= @subject.regulation_id %>').append("<%= j render(:partial => 'subject_info') %>");

@@ -83,6 +83,32 @@ class ActsController < ApplicationController
     end
   end
 
+  # SUBJECT STUFF
+
+  def prepare_subject
+    @regulation = Regulation.find_by_id(params[:id])
+    
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_subject
+    @subject = Subject.create(name: params[:subject][:name],
+                              regulation_id: params[:subject][:regulation_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_subject
+    Subject.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # PATCH/PUT /acts/1
   def update
     if @act.update(act_params)
