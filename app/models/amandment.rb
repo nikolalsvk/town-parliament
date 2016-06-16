@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  date        :date
-#  type        :string           default("wait")
+#  category    :string           default("wait")
 #  content     :text
 #  explanation :text
 #  rating      :integer
@@ -13,6 +13,7 @@
 #  user_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  status      :string
 #
 
 class Amandment < ActiveRecord::Base
