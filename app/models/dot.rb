@@ -11,6 +11,9 @@
 #
 
 class Dot < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # Tacka
   belongs_to :stance
 

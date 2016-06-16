@@ -11,6 +11,9 @@
 #
 
 class Stance < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # Stav
   belongs_to :clause
 

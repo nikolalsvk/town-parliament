@@ -10,6 +10,9 @@
 #
 
 class Clause < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # Clan
   belongs_to :subject
 

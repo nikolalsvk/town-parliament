@@ -11,6 +11,9 @@
 #
 
 class Subdot < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # Podtacka
   belongs_to :dot
 

@@ -11,6 +11,9 @@
 #
 
 class Paragraph < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # Alineja (paragraf, pasus)
   belongs_to :subdot
 end

@@ -11,6 +11,9 @@
 #
 
 class Head < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # Glava
   TYPES = [:introduction, :main, :end]
 

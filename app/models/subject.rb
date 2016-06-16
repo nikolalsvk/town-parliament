@@ -10,6 +10,9 @@
 #
 
 class Subject < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
   # Predmet
   belongs_to :regulation
 
