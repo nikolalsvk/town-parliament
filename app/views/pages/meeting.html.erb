@@ -1,0 +1,48 @@
+<h1>Session</h1>
+<hr/>
+<% if !@meeting.status? %>
+  <%= link_to('<button id="openButton" type="button" class="btn btn-primary">Open session</button>'.html_safe, pages_meeting_path) %>
+<% else %>
+  <%= link_to('<button id="closeButton" type="button" class="btn btn-danger">Close session</button>'.html_safe, pages_meeting_path) %>
+<div id="session">
+<table class="table table-striped">
+  <thead>
+  <th style="width: 70%">Act name</th>
+  <th style="width: 5%">Votes</th>
+  <th style="width: 5%">Approve</th>
+  <th style="width: 5%">Refuse</th>
+  </thead>
+  <tbody>
+  <% @acts.each do |act| %>
+    <% if act.status != "approved" %>
+      <tr>
+        <td><%= act.name %></td>
+        <td><input type="number" min="-100" max="100"></td>
+        <td><%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, act) %></td>
+        <td><%= link_to('<button type="button" class="btn btn-danger">Refuse</button>'.html_safe, act, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+  <th style="width: 70%">Amandment name</th>
+  <th style="width: 5%">Votes</th>
+  <th style="width: 5%">Approve</th>
+  <th style="width: 5%">Refuse</th>
+  </thead>
+  <tbody>
+  <% @amandments.each do |amandment| %>
+      <tr>
+        <td><%= amandment.name %></td>
+        <td><input type="number" min="-100" max="100"></td>
+        <td><%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, amandment) %></td>
+        <td><%= link_to('<button type="button" class="btn btn-danger">Refuse</button>'.html_safe, amandment, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+<% end %>

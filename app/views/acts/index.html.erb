@@ -7,16 +7,16 @@
     <th style="width: 70%">Act name</th>
     <th style="width: 5%">Show</th>
     <th style="width: 5%">Edit</th>
-    <th style="width: 5%">Destroy</th>
   </thead>
   <tbody>
     <% @acts.each do |act| %>
+    <% if act.status == "approved" %>
       <tr>
         <td><%= act.name %></td>
         <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, act) %></td>
         <td><%= link_to('<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_act_path(act)) %></td>
-        <td><%= link_to('<button type="button" class="btn btn-danger">Destroy</button>'.html_safe, act, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
-      </tr>
+       </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>
