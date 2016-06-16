@@ -1,13 +1,13 @@
-<div class="modal fade" id="intro-head-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="main-head-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="row">
         <div class="col-md-4"></div>
-        <div class="col-md-4"><strong><h4>Uvodni deo- naziv glave</h4></strong></div>
+        <div class="col-md-4"><strong><h4>Glavni deo - naziv glave</h4></strong></div>
         <div class="col-md-4"></div>
       </div>
       <%= form_for @act.heads.build, url: create_head_intro_path, remote: true do |fgi| %>
-      <%= fgi.hidden_field :category, value: Head::TYPES[0] %>
+      <%= fgi.hidden_field :category, value: Head::TYPES[1] %>
       <div class="form-group">
         <div clas="row">
           <label class="col-md-4 control-label" ></label>

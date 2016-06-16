@@ -1,3 +1,16 @@
-$("#intro-head-modal").modal('toggle');
-$("#head_name").val("");
-$('.intro-heads-place').append("<%= j render(:partial => 'head_info') %>");
+<% if @head.category == "introduction" %>
+  $("#intro-head-modal").modal('toggle');
+  $("#head_name").val("");
+  $('.intro-heads-place').append("<%= j render(:partial => 'head_info') %>");
+  $('.info-head-button').prop("disabled", true);
+<% elsif @head.category == "main" %>
+  $("#main-head-modal").modal('toggle');
+  $("#head_name").val("");
+  $('.main-heads-place').append("<%= j render(:partial => 'head_info') %>");
+  $('.main-head-button').prop("disabled", true);
+<% else %>
+  $("#end-head-modal").modal('toggle');
+  $("#head_name").val("");
+  $('.end-heads-place').append("<%= j render(:partial => 'head_info') %>");
+  $('.end-head-button').prop("disabled", true);  
+<% end %>
