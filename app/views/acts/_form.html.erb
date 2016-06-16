@@ -52,14 +52,23 @@
   </div>
 
 
-  <!-- GLAVE -->
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 
-  <div class="form-group">
-    <label class="col-md-4 control-label" >Uvodni dio</label>
-     <div class="col-md-1">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#intro-head-modal">Add glava</button>
+
+<% end %>
+
+  <!-- GLAVE -->
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="form-group">
+        <label class="control-label" >Uvodni dio</label>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#intro-head-modal">Add glava</button>
+      </div>
     </div>
   </div>
+
 
   <div class="row">
     <div class="col-md-4 col-md-offset-4 intro-heads-place">
@@ -70,10 +79,7 @@
 
 
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
 
   <%= render "head_introduction_modal" %>
+  <div class="modal-place"></div>
 
