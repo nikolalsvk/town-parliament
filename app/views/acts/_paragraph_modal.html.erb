@@ -1,0 +1,47 @@
+<div class="modal fade" id="paragraph-modal-<%= @subdot.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4"><strong><h4>Paragraf</h4></strong></div>
+        <div class="col-md-4"></div>
+      </div>
+      <%= form_for @subdot.paragraphs.build, url: create_paragraph_path, html: { class:"form-horizontal" }, remote: true do |fpg| %>
+      <%= fpg.hidden_field :subdot_id, value: @subdot.id %>
+      <div class="form-group">
+        <div clas="row">
+          <label class="col-md-4 control-label" ></label>
+           <div class="col-md-4">
+            <%= fpg.text_field :name, class: "form-control input-md", placeholder: "Naziv",required: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div clas="row">
+          <label class="col-md-4 control-label" ></label>
+           <div class="col-md-4">
+            <%= fpg.text_area :content, class: "form-control input-md", placeholder: "Sadrzaj",required: true %>
+          </div>
+        </div>
+      </div>
+
+      <!-- dugmad -->
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <span>
+            <%= fpg.submit "Add Paragraf", class:"btn btn-danger" %>
+          </span>
+          <span>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+          </span>
+        </div>
+        <% end %>
+        <br>
+      </div>
+      <br>
+    </div>
+  </div>
+</div>

@@ -221,8 +221,28 @@ class ActsController < ApplicationController
     end
   end
 
-  def destroy_subdot
-    Subdot.find_by_id(params[:id]).destroy
+  # PARAGRAPH STUFF
+
+  def prepare_paragraph
+    @subdot = Subdot.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_paragraph
+    @paragraph = Paragraph.create(name: params[:paragraph][:name],
+                                  content: params[:paragraph][:content],
+                                  subdot_id: params[:paragraph][:subdot_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_paragraph
+    Paragraph.find_by_id(params[:id]).destroy
 
     respond_to do |format|
       format.js

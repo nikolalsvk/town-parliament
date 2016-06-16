@@ -1,0 +1,4 @@
+$("#paragraph-modal-<%= @paragraph.subdot_id %>").modal('toggle');
+$("#paragraph_name").val("");
+$("#paragraph_content").val("");
+$('#subdot-<%= @paragraph.subdot_id %>').append("<%= j render(:partial => 'paragraph_info') %>");
