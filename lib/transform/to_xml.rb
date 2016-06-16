@@ -13,8 +13,7 @@ class Transform::ToXml
       xml.akt('naziv' => @akt.name, 'drzava' => @akt.state,'grad' => @akt.city, 'datum' => @akt.date) {
         xml.preambula @akt.preambula
         @akt.heads.each do |h|
-          xml.dioglava h.type
-          xml.glava('naziv' => h.name) {
+          xml.glava('naziv' => h.name, 'kategorija' => h.category) {
             h.regulations.each do |r|
               xml.odredba('naziv' => r.name) {
                 xml.definicija r.definition
