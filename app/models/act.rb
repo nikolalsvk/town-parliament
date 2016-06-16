@@ -16,7 +16,9 @@
 
 class Act < ActiveRecord::Base
   # Akt
-  belongs_to :user, -> { where(:name => "alderman") }
+  belongs_to :user
 
   has_many :heads, :dependent => :destroy
+
+  has_many :amandments
 end
