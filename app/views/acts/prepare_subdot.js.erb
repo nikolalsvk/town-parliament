@@ -1,0 +1,4 @@
+$('.modal-place').append("<%= j render(:partial => 'subdot_modal') %>");
+$("#subdot_name").val("");
+$("#subdot_content").val("");
+$('#subdot-modal-<%= @dot.id %>').modal("toggle");

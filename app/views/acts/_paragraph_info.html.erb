@@ -1,0 +1,5 @@
+<div id="paragraph-<%= @paragraph.id %>">
+  Paragraf: <%= @paragraph.name %> 
+
+  <%= link_to "Delete", destroy_paragraph_path(id: @paragraph.id), method:"delete", data: {confirm: "Are you sure?"}, class: "btn btn-danger",remote: true %>
+</div>

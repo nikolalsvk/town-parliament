@@ -3,5 +3,5 @@
 
   <%= link_to "Delete", destroy_subject_path(id: @subject.id), method:"delete", data: {confirm: "Are you sure?"}, class: "btn btn-danger",remote: true %>
 
-  <%= link_to "Add Clan", "#" , method:"post",class: "btn btn-primary", remote: true %>
+  <%= link_to "Add Clan", prepare_clause_path(id: @subject.id) , method:"post", class: "btn btn-primary", remote: true %>
 </div>

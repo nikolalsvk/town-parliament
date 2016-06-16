@@ -1,0 +1,4 @@
+$('.modal-place').append("<%= j render(:partial => 'paragraph_modal') %>");
+$("#paragraph_name").val("");
+$("#paragraph_content").val("");
+$('#paragraph-modal-<%= @subdot.id %>').modal("toggle");

@@ -1,4 +1,5 @@
 class ActsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_act, only: [:show, :edit, :update, :destroy]
 
   # GET /acts
@@ -30,6 +31,7 @@ class ActsController < ApplicationController
   # GET /acts/new
   def new
     @act = Act.new
+    intit_heads
   end
 
   # GET /acts/1/edit
@@ -38,10 +40,13 @@ class ActsController < ApplicationController
 
   # POST /acts
   def create
+    binding.pry
     @act = Act.new(act_params)
 
     if @act.save
-
+      session[:heads].each do |head_id|
+        Head.find_by_id(head_id).update(act_id: @act.id)
+      end
       redirect_to @act, notice: 'Act was successfully created.'
     else
       render :new
@@ -52,7 +57,8 @@ class ActsController < ApplicationController
 
   def create_head_intro
     @head = Head.create(category: params[:head][:category], 
-                        name: params[:head][:name])    
+                        name: params[:head][:name])
+    add_head_id(@head.id)    
     respond_to do |format|
       format.js
     end
@@ -60,7 +66,8 @@ class ActsController < ApplicationController
 
   def destroy_head
     # destroy heds here
-    Head.find_by_id(params[:id]).destroy
+    @head = Head.find_by_id(params[:id]).destroy
+    remove_head_id(@head.id)
     respond_to do |format|
       format.js
     end
@@ -118,6 +125,136 @@ class ActsController < ApplicationController
     end
   end
 
+  # CLAUSE STUFF
+
+  def prepare_clause
+    @subject = Subject.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_clause
+    @clause = Clause.create(name: params[:clause][:name],
+                            subject_id: params[:clause][:subject_id])
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_clause
+    Clause.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # STANCE STUFF
+
+  def prepare_stance
+    @clause = Clause.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_stance
+    @stance = Stance.create(name: params[:stance][:name],
+                            content: params[:stance][:content],
+                            clause_id: params[:stance][:clause_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_stance
+    Stance.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # DOT STUFF
+
+  def prepare_dot
+    @stance = Stance.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_dot
+    @dot = Dot.create(name: params[:dot][:name],
+                      content: params[:dot][:content],
+                      stance_id: params[:dot][:stance_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_dot
+    Dot.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # SUBDOT STUFF
+
+  def prepare_subdot
+    @dot = Dot.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_subdot
+    @subdot = Subdot.create(name: params[:subdot][:name],
+                            content: params[:subdot][:content],
+                            dot_id: params[:subdot][:dot_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  # PARAGRAPH STUFF
+
+  def prepare_paragraph
+    @subdot = Subdot.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_paragraph
+    @paragraph = Paragraph.create(name: params[:paragraph][:name],
+                                  content: params[:paragraph][:content],
+                                  subdot_id: params[:paragraph][:subdot_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_paragraph
+    Paragraph.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # PATCH/PUT /acts/1
   def update
     if @act.update(act_params)
@@ -154,5 +291,17 @@ class ActsController < ApplicationController
     else
       super.to_s
     end
+  end
+
+  def intit_heads
+    session[:heads] = []
+  end
+
+  def add_head_id(id)
+    session[:heads] << id
+  end
+
+  def remove_head_id(id)
+    session[:heads].delete(id)
   end
 end

@@ -1,1 +1,9 @@
 $("#introduction-head-<%= params[:id] %>").remove();
+<% if @head.category == "introduction" %>
+  $('.info-head-button').removeAttr('disabled');
+<% elsif @head.category == "main" %>
+  $('.main-head-button').removeAttr('disabled');
+<% else %>
+  $('.end-head-button').removeAttr('disabled');
+<% end %>
+  
