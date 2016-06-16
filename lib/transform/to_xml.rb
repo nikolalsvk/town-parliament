@@ -33,7 +33,7 @@ class Transform::ToXml
                                   xml.podtacka {
                                     xml.sadrzaj sd.content
 
-                                    alineja(sd)
+                                    alineja(sd, xml)
                                   }
                                 end
                               }
@@ -54,7 +54,7 @@ class Transform::ToXml
     @akt = builder.to_xml
   end
 
-  def alineja(subdot)
+  def alineja(subdot, xml)
     subdot.paragraphs.each do |p|
       xml.alineja {
         xml.sadrzaj p.content
