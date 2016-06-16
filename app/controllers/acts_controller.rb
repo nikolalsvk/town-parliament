@@ -195,6 +195,34 @@ class ActsController < ApplicationController
     end
   end
 
+  # SUBDOT STUFF
+
+  def prepare_subdot
+    @dot = Dot.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_subdot
+    @subdot = Subdot.create(name: params[:subdot][:name],
+                            content: params[:subdot][:content],
+                            dot_id: params[:subdot][:dot_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_subdot
+    Subdot.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # PATCH/PUT /acts/1
   def update
     if @act.update(act_params)
