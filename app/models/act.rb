@@ -3,7 +3,7 @@
 # Table name: acts
 #
 #  id         :integer          not null, primary key
-#  preambula  :string
+#  preambula  :text
 #  name       :string
 #  state      :string
 #  city       :string

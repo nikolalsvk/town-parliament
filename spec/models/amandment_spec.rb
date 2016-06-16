@@ -4,9 +4,10 @@
 #
 #  id          :integer          not null, primary key
 #  date        :date
-#  type        :string
+#  type        :string           default("wait")
 #  content     :text
 #  explanation :text
+#  rating      :integer
 #  owner_id    :integer
 #  owner_type  :string
 #  user_id     :integer
