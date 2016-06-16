@@ -322,7 +322,6 @@ DEPENDENCIES
   pry-byebug
   rails (= 4.2.4)
   rails_12factor
-  ransack
   rspec-rails
   selenium-webdriver
   shoulda

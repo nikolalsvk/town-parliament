@@ -19,7 +19,6 @@ gem 'devise', '~> 3.4.0'
 
 gem 'omniauth-facebook'
 gem 'kaminari'
-gem 'ransack'
 gem 'dynamic_form'
 
 # Resolving TZinfo Windows error
