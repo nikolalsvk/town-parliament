@@ -1,9 +1,9 @@
 <h1>Session</h1>
 <hr/>
 <% if !@meeting.status? %>
-  <%= link_to('<button id="openButton" type="button" class="btn btn-primary">Open session</button>'.html_safe, pages_meeting_path) %>
+  <%= link_to('<button id="openButton" type="button" class="btn btn-primary">Open session</button>'.html_safe, pages_meeting_path(:status => true)) %>
 <% else %>
-  <%= link_to('<button id="closeButton" type="button" class="btn btn-danger">Close session</button>'.html_safe, pages_meeting_path) %>
+  <%= link_to('<button id="closeButton" type="button" class="btn btn-danger">Close session</button>'.html_safe, pages_meeting_path(:status => false)) %>
 <div id="session">
 <table class="table table-striped">
   <thead>
