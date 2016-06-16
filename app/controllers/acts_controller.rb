@@ -31,6 +31,7 @@ class ActsController < ApplicationController
   # GET /acts/new
   def new
     @act = Act.new
+    intit_heads
   end
 
   # GET /acts/1/edit
@@ -39,10 +40,13 @@ class ActsController < ApplicationController
 
   # POST /acts
   def create
+    binding.pry
     @act = Act.new(act_params)
 
     if @act.save
-
+      session[:heads].each do |head_id|
+        Head.find_by_id(head_id).update(act_id: @act.id)
+      end
       redirect_to @act, notice: 'Act was successfully created.'
     else
       render :new
@@ -53,7 +57,8 @@ class ActsController < ApplicationController
 
   def create_head_intro
     @head = Head.create(category: params[:head][:category], 
-                        name: params[:head][:name])    
+                        name: params[:head][:name])
+    add_head_id(@head.id)    
     respond_to do |format|
       format.js
     end
@@ -62,6 +67,7 @@ class ActsController < ApplicationController
   def destroy_head
     # destroy heds here
     @head = Head.find_by_id(params[:id]).destroy
+    remove_head_id(@head.id)
     respond_to do |format|
       format.js
     end
@@ -285,5 +291,17 @@ class ActsController < ApplicationController
     else
       super.to_s
     end
+  end
+
+  def intit_heads
+    session[:heads] = []
+  end
+
+  def add_head_id(id)
+    session[:heads] << id
+  end
+
+  def remove_head_id(id)
+    session[:heads].delete(id)
   end
 end
