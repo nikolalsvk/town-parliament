@@ -1,0 +1,4 @@
+$('.modal-place').append("<%= j render(:partial => 'stance_modal') %>");
+$("#stance_name").val("");
+$("#stance_content").val("");
+$('#stance-modal-<%= @clause.id %>').modal("toggle");

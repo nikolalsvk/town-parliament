@@ -1,0 +1,7 @@
+<div id="stance-<%= @stance.id %>">
+  Predmet: <%= @stance.name %> 
+
+  <%= link_to "Delete", destroy_stance_path(id: @stance.id), method:"delete", data: {confirm: "Are you sure?"}, class: "btn btn-danger",remote: true %>
+
+  <%= link_to "Add Tacku", "#" , method:"post", class: "btn btn-primary", remote: true %>
+</div>
