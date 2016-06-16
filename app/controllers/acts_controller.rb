@@ -55,7 +55,7 @@ class ActsController < ApplicationController
 
   def destroy_head
     # destroy heds here
-    Head.find_by_id(params[:id]).destroy
+    @head = Head.find_by_id(params[:id]).destroy
     respond_to do |format|
       format.js
     end
