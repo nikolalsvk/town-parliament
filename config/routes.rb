@@ -46,6 +46,11 @@ TownParliament::Application.routes.draw do
   post '/create_subdot', to: 'acts#create_subdot'
   delete '/destroy_subdot', to: 'acts#destroy_subdot'
 
+  # PARAGRAPH ROUTES
+  post '/prepare_paragraph', to: 'acts#prepare_paragraph'
+  post '/create_paragraph', to: 'acts#create_paragraph'
+  delete '/destroy_paragraph', to: 'acts#destroy_paragraph'
+
 
   root :to => "pages#index"
 
