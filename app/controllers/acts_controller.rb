@@ -139,6 +139,34 @@ class ActsController < ApplicationController
     end
   end
 
+  # STANCE STUFF
+
+  def prepare_stance
+    @clause = Clause.find_by_id(params[:id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def create_stance
+    @stance = Stance.create(name: params[:stance][:name],
+                            content: params[:stance][:content],
+                            clause_id: params[:stance][:clause_id])
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def destroy_stance
+    Stance.find_by_id(params[:id]).destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   # PATCH/PUT /acts/1
   def update
     if @act.update(act_params)
