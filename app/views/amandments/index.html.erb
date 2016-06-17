@@ -12,7 +12,7 @@
   <tbody>
     <% @amandments.each do |amandment| %>
       <tr>
-        <td><%= amandment.name %></td>
+        <td><%= amandment.explanation %></td>
         <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, amandment) %></td>
         <td><%= link_to('<button type="button" class="btn btn-danger">Destroy</button>'.html_safe, amandment, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
       </tr>
