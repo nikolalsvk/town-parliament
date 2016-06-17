@@ -287,11 +287,12 @@ class ActsController < ApplicationController
 
   # PATCH/PUT /acts/1
   def update
+    byebug
     @act_new = @act.dup
     @act_new.save
     @act_new.update(act_params)
 
-    @act.heads.each do |head|
+    @act_new.heads.each do |head|
       head_new = head.dup
       head_new.act_id = @act_new.id
       head_new.save!
