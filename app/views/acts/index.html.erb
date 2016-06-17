@@ -1,37 +1,62 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Acts</h1>
+<% if @acts.empty? %>
+  <h3>Sorry, there are no acts in the database :(</h3>
+  <p>Ask some alderman to add them :)</p>
+<% else %>
+  <h1>Listing Acts</h1>
 
-<table class="table table-striped">
-  <thead>
-    <th style="width: 70%">Act name</th>
-    <th style="width: 5%">Approved</th>
-    <th style="width: 5%">Show</th>
-    <th style="width: 5%">Edit</th>
-    <th style="width: 5%">HTML</th>
-    <th style="width: 5%">PDF</th>
-  </thead>
-  <tbody>
-    <% @acts.each do |act| %>
+  <table class="table table-striped">
+    <thead>
+      <th style="width: 70%">Act name</th>
+      <th style="width: 5%">Approved</th>
+      <th style="width: 5%">Show</th>
+      <th style="width: 5%">Edit</th>
+      <th style="width: 5%">Destroy</th>
+      <th style="width: 5%">HTML</th>
+      <th style="width: 5%">PDF</th>
+    </thead>
+    <tbody>
+      <% @acts.each do |act| %>
 
-      <tr>
-        <td><%= act.name %></td>
-        <% if act.status %>
-          <td><a class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></a></td>
-        <% else %>
+        <tr>
+          <td><%= act.name %></td>
+
+          <% if act.status %>
+            <td><a class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></a></td>
+          <% else %>
             <td><a class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
-        <% end %>
-        <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, act) %></td>
-        <td><%= link_to('<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_act_path(act)) %></td>
-        <td><%= link_to('<button type="button" class="btn btn-danger">Destroy</button>'.html_safe, act, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
-        <td> <%= link_to "HTML", act_html_path(act), class:"btn btn-info" %> </td>
-        <td> <%= link_to "PDF", act_pdf_path(act) <<'.pdf', class:"btn btn-warning", :target => "_blank" %> </td>
-       </tr>
+          <% end %>
+          <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, act) %></td>
 
-    <% end %>
-  </tbody>
-</table>
+          <td>
+            <% if current_user.alderman? %>
+              <%= link_to('<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_act_path(act)) %>
+            <% end %>
+          </td>
 
-<br>
+          <% if act.user.try(:id) == current_user.id %>
 
-<%= link_to('<button type="button" class="btn btn-primary">New Act</button>'.html_safe, new_act_path) %>
+            <td><%= link_to('<button type="button" class="btn btn-danger">Destroy</button>'.html_safe, act, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+
+          <% else %>
+
+            <td></td>
+
+          <% end %>
+
+          <td> <%= link_to "HTML", act_html_path(act), class:"btn btn-info" %> </td>
+          <td> <%= link_to "PDF", act_pdf_path(act) <<'.pdf', class:"btn btn-warning", :target => "_blank" %> </td>
+         </tr>
+
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <% if current_user.alderman? %>
+    <%= link_to('<button type="button" class="btn btn-primary">New Act</button>'.html_safe, new_act_path) %>
+  <% end %>
+
+<% end %>

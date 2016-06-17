@@ -8,6 +8,9 @@ class AmandmentsController < ApplicationController
 
   # GET /amandments/1
   def show
+    @act = Act.find(@amandment.owner_id)
+
+    redirect_to @act
   end
 
   # GET /amandments/new
@@ -23,6 +26,7 @@ class AmandmentsController < ApplicationController
   # POST /amandments
   def create
     @amandment = Amandment.new(amandment_params)
+    @amandment.user = current_user
 
     if @amandment.save
       redirect_to @amandment, notice: 'Amandment was successfully created.'

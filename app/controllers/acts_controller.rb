@@ -18,6 +18,7 @@ class ActsController < ApplicationController
 
     mark_logic = Connection::MarkLogic.new
     act_from_ml = mark_logic.download_act(@akt)
+
     @act = Nokogiri::XML(act_from_ml)
   rescue
     @act = Transform::ToXml.transform(@akt)
@@ -57,6 +58,7 @@ class ActsController < ApplicationController
   # POST /acts
   def create
     @act = Act.new(act_params)
+    @act.user = current_user
 
     if @act.save
       session[:heads].each do |head_id|
@@ -288,7 +290,7 @@ class ActsController < ApplicationController
     @act_new = @act.dup
     @act_new.save
     @act_new.update(act_params)
-    
+
     @act.heads.each do |head|
       head_new = head.dup
       head_new.act_id = @act_new.id
@@ -336,7 +338,7 @@ class ActsController < ApplicationController
         end
       end
     end
-    
+
     respond_to do |format|
       format.js
     end
@@ -345,9 +347,13 @@ class ActsController < ApplicationController
   # DELETE /acts/1
   def destroy
     @akt = Act.find(params[:id])
+
     client = Connection::MarkLogic.new.client
-    client.send_corona_request("/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml", :delete)
+
+    client.send_corona_request("/v1/documents?database=Tim22&uri=/acts/act_#{@akt.id}.xml", :delete)
+
     @act.destroy
+
     redirect_to acts_url, notice: 'Act was successfully destroyed.'
   end
 

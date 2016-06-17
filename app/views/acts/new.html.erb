@@ -1,5 +1,9 @@
 <h1>New Act</h1>
+
 <% if !@meeting.status? %>
   <%= render 'form' %>
+<% else %>
+  <h3>Session is active, you can't add any more acts right now</h3>
 <% end %>
+
 <%= link_to('<button type="button" class="btn btn-success">Back</button>'.html_safe, acts_path) %>
