@@ -10,7 +10,13 @@ TownParliament::Application.routes.draw do
     resources :users
   end
 
-  resources :acts, :amandments
+  resources :acts do
+      # HTML AND PDF
+  get '/html', to: 'acts#html'
+  get '/pdf', to: 'acts#pdf'
+  end
+  resources :amandments
+
   post '/create_head_intro', to: 'acts#create_head_intro'
   delete '/destroy_head', to:'acts#destroy_head'
 

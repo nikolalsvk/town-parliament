@@ -32,6 +32,10 @@ gem 'activedocument'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
+# Pdf Shit
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 group :test, :development do
   gem 'rspec-rails'
   gem 'awesome_print'
