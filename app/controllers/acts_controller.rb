@@ -28,15 +28,16 @@ class ActsController < ApplicationController
   def new
     @act = Act.new
     @meeting = Meeting.find(1)
-    redirect_to root_path, notice: 'You cannot add new act when Session is in progress!' and return if @meeting.status
     intit_heads
+    redirect_to root_path, notice: 'You cannot add new act when Session is in progress!' and return if @meeting.status
   end
 
   # GET /acts/1/edit
   def edit
     @amandment = Amandment.new
-     @meeting = Meeting.find(1)
-     redirect_to acts_path, notice: 'You cannot edit act when Session is in progress!' and return if @meeting.status
+    @meeting = Meeting.find(1)
+    intit_heads
+    redirect_to acts_path, notice: 'You cannot edit act when Session is in progress!' and return if @meeting.status
   end
 
   def html
@@ -85,10 +86,12 @@ class ActsController < ApplicationController
                         act_id: params[:head][:act_id])
 
     else
-    @head = Head.create(category: params[:head][:category],
-                        name: params[:head][:name])
+      @head = Head.create(category: params[:head][:category],
+                          name: params[:head][:name])
     end
+
     add_head_id(@head.id)
+
     respond_to do |format|
       format.js
     end
@@ -287,58 +290,22 @@ class ActsController < ApplicationController
 
   # PATCH/PUT /acts/1
   def update
-    byebug
     @act_new = @act.dup
-    @act_new.save
+
+    @act_new.heads = @act.heads
+
     @act_new.update(act_params)
 
-    @act_new.heads.each do |head|
-      head_new = head.dup
-      head_new.act_id = @act_new.id
-      head_new.save!
-
-      head.regulations.each do |regulation|
-        regulation_new = regulation.dup
-        regulation_new.head_id = head_new.id
-        regulation_new.save!
-
-        regulation.subjects.each do |subject|
-          subject_new = subject.dup
-          subject_new.regulation_id = regulation_new.id
-          subject_new.save!
-
-          subject.clauses.each do |clause|
-            clause_new = clause.dup
-            clause_new.subject_id = subject_new.id
-            clause_new.save!
-
-            clause.stances.each do |stance|
-              stance_new = stance.dup
-              stance_new.clause_id = clause_new.id
-              stance_new.save!
-
-              stance.dots.each do |dot|
-                dot_new = dot.dup
-                dot_new.stance_id = stance_new.id
-                dot_new.save!
-
-                dot.subdots.each do |subdot|
-                  subdot_new = subdot.dup
-                  subdot_new.dot_id = dot_new.id
-                  subdot_new.save!
-
-                  subdot.paragraphs.each do |paragraph|
-                    paragraph_new = paragraph.dup
-                    paragraph_new.subdot_id = subdot_new.id
-                    paragraph_new.save!
-                  end
-                end
-              end
-            end
-          end
-        end
-      end
+    session[:heads].each do |head_id|
+      head = Head.find(head_id)
+      head.update(act_id: @act.id)
+      @act_new.heads << head
     end
+
+    act_xml = Transform::ToXml.transform(@act_new).to_s
+
+    mark_logic = Connection::MarkLogic.new
+    mark_logic.upload_amandment(@act_new, act_xml)
 
     respond_to do |format|
       format.js
