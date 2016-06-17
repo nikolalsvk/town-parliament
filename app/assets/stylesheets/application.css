@@ -6,4 +6,20 @@
  *= require_tree .
 */
 
+* {
+  margin: 0;
+}
+
 .top48 { margin-top: 48px; }
+
+.panel {
+  overflow: auto;
+}
+
+.panel-footer, .panel-body, .panel-heading {
+  margin-bottom: 0px; !important
+}
+
+.panel-body {
+  margin-bottom: 0px; !important
+}

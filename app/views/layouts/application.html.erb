@@ -5,11 +5,12 @@
 
     <title>Town Parilament</title>
 
-    <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application" %>
 
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+    <%= stylesheet_link_tag "application" %>
 
     <%= csrf_meta_tags %>
 
@@ -25,9 +26,15 @@
 
     <div class="container">
 
-      <%= render "layouts/application/flash_messages" %>
+      <div class="panel panel-default">
+        <div class="panel panel-body">
 
-      <%= yield %>
+          <%= render "layouts/application/flash_messages" %>
+
+          <%= yield %>
+
+        </div>
+      </div>
 
     </div>
 
