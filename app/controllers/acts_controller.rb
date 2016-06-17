@@ -27,12 +27,15 @@ class ActsController < ApplicationController
   def new
     @act = Act.new
     @meeting = Meeting.find(1)
+    redirect_to root_path, notice: 'You cannot add new act when Session is in progress!' and return if @meeting.status
     intit_heads
   end
 
   # GET /acts/1/edit
   def edit
     @amandment = Amandment.new
+     @meeting = Meeting.find(1)
+     redirect_to acts_path, notice: 'You cannot edit act when Session is in progress!' and return if @meeting.status
   end
 
   def html
