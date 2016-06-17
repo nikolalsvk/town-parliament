@@ -38,7 +38,6 @@ class ActsController < ApplicationController
 
   # POST /acts
   def create
-    binding.pry
     @act = Act.new(act_params)
 
     if @act.save
