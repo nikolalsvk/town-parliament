@@ -53,8 +53,15 @@ class ActsController < ApplicationController
   # HEAD STUFF
 
   def create_head_intro
+    if params[:head][:act_id]
+      @head = Head.create(category: params[:head][:category], 
+                        name: params[:head][:name],
+                        act_id: params[:head][:act_id])
+    
+    else
     @head = Head.create(category: params[:head][:category], 
                         name: params[:head][:name])
+    end
     add_head_id(@head.id)    
     respond_to do |format|
       format.js

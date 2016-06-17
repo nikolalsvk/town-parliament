@@ -4,4 +4,8 @@
   <%= link_to "Delete", destroy_regulation_path(id: @regulation.id), method:"delete", data: {confirm: "Are you sure?"}, class: "btn btn-danger",remote: true %>
 
   <%= link_to "Add Predmet", prepare_subject_path(id: @regulation.id) , method:"post",class: "btn btn-primary", remote: true %>
+
+  <% @regulation.subjects.each do |subject| %>
+  	<%= render partial: "subject_info", locals: { "@subject": subject } %>
+  <% end %>
 </div>
