@@ -13,6 +13,7 @@ class AmandmentsController < ApplicationController
   # GET /amandments/new
   def new
     @amandment = Amandment.new
+    @meeting = Meeting.find(1)
   end
 
   # GET /amandments/1/edit
