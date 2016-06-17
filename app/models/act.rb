@@ -23,5 +23,5 @@ class Act < ActiveRecord::Base
 
   has_many :heads, :dependent => :destroy
 
-  has_many :amandments
+  has_many :amandments, :dependent => :destroy
 end

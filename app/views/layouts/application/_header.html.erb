@@ -13,36 +13,40 @@
 
 
     <div class="collapse navbar-collapse" id="baseapp-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+
         <% if user_signed_in? %>
+          <ul class="nav navbar-nav">
+
           <li><%= link_to "Search", search_path %></li>
 
           <li class="dropdown">
-              <a class="dropdown-toggle" type="button" data-toggle="dropdown">Acts
-                <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "All Acts", acts_path %></li>
+            <a class="dropdown-toggle" type="button" data-toggle="dropdown">Acts
+              <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "All Acts", acts_path %></li>
+              <% if current_user.alderman? %>
                 <li><%= link_to "New Act", new_act_path %></li>
-              </ul>
+              <% end %>
+            </ul>
           </li>
 
-          <% if !current_user.citizen? %>
-              <li class="dropdown">
-                <a class="dropdown-toggle" type="button" data-toggle="dropdown">Amandments
-                  <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "All Amandments", amandments_path %></li>
-                  <li><%= link_to "New Amandment", new_amandment_path %></li>
-                </ul>
-              </li>
+          <% if current_user.alderman? %>
+            <li class="dropdown">
+              <a class="dropdown-toggle" type="button" data-toggle="dropdown">Amandments
+                <span class="caret"></span></a>
+
+              <ul class="dropdown-menu">
+                <li><%= link_to "All Amandments", amandments_path %></li>
+              </ul>
+            </li>
           <% end %>
 
           <% if current_user.assembly_president? %>
             <li><%= link_to "Session", pages_meeting_path %></li>
           <% end %>
-      </ul>
+        </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Account settings", edit_user_registration_path %></li>
 
           <% if current_user.admin? %>
@@ -50,12 +54,17 @@
           <% end %>
 
           <li><%= link_to "Sign out", destroy_user_session_path %></li>
-        <% else %>
+        </ul>
+      <% else %>
+
+        <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Sign up", new_user_registration_path %></li>
           <li><%= link_to "Sign in", new_user_session_path %></li>
           <li><%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %></li>
+        </ul>
 
-        <% end %>
+      <% end %>
+
       </ul>
     </div>
 

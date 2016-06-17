@@ -2,6 +2,8 @@ TownParliament::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
+  root :to => "pages#index"
+
   get "pages/index"
   get "pages/meeting"
   get "/admin" => "admin/base#index", :as => "admin"
@@ -11,10 +13,11 @@ TownParliament::Application.routes.draw do
   end
 
   resources :acts do
-      # HTML AND PDF
-  get '/html', to: 'acts#html'
-  get '/pdf', to: 'acts#pdf'
+    # HTML AND PDF
+    get '/html', to: 'acts#html'
+    get '/pdf', to: 'acts#pdf'
   end
+
   resources :amandments
 
   post '/create_head_intro', to: 'acts#create_head_intro'
@@ -55,9 +58,7 @@ TownParliament::Application.routes.draw do
   post '/create_paragraph', to: 'acts#create_paragraph'
   delete '/destroy_paragraph', to: 'acts#destroy_paragraph'
 
-
-  root :to => "pages#index"
-
+  # SEARCH SHIT
   get :search, to: 'search#index'
   get :perform_search, to: 'search#perform'
 

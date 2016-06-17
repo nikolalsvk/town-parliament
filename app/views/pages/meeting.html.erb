@@ -11,6 +11,7 @@
   <th style="width: 5%">Votes</th>
   <th style="width: 5%">Approve</th>
   <th style="width: 5%">Refuse</th>
+  <th style="width: 5%">Show</th>
   </thead>
   <tbody>
   <% @acts.each do |act| %>
@@ -20,6 +21,7 @@
         <td><input type="number" min="-100" max="100"></td>
         <td><%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, pages_meeting_path(:akt => act)) %></td>
         <td><%= link_to('<button type="button" class="btn btn-danger">Refuse</button>'.html_safe, act, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+        <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, act) %></td>
       </tr>
     <% end %>
   <% end %>
@@ -29,21 +31,35 @@
 <table class="table table-striped">
   <thead>
   <th style="width: 70%">Amandment name</th>
+  <th style="width: 70%">Act name</th>
+  <th style="width: 70%">Show Act</th>
   <th style="width: 5%">Votes</th>
   <th style="width: 5%">Approve</th>
   <th style="width: 5%">Refuse</th>
+  <th style="width: 5%">Show</th>
   </thead>
   <tbody>
   <% @amandments.each do |amandment| %>
       <tr>
         <td><%= amandment.explanation %></td>
+        <td><%= amandment.act.name %></td>
+        <td><%= link_to('<button type="button" class="btn btn-info">Show Act</button>'.html_safe, amandment.act) %></td>
         <td><input type="number" min="-100" max="100"></td>
-        <% if Act.find(amandment.act).status == "approved" %>
-          <td><%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, pages_meeting_path(:amandman => amandment, :akt_id => amandment.act)) %></td>
-        <% else %>
-          <td><%= link_to('<button type="button" class="btn btn-primary disabled">Approve</button>'.html_safe) %></td>
+        <td>
+        <% unless amandment.status == "approved" %>
+          <% if amandment.act.status == "approved" %>
+
+            <%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, pages_meeting_path(:amandman => amandment, :akt_id => amandment.act)) %>
+
+          <% else %>
+
+            <%= link_to('<button type="button" class="btn btn-primary disabled">Approve</button>'.html_safe) %>
+
+          <% end %>
         <% end %>
+        </td>
         <td><%= link_to('<button type="button" class="btn btn-danger">Refuse</button>'.html_safe, amandment, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+        <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, amandment) %></td>
       </tr>
   <% end %>
   </tbody>
