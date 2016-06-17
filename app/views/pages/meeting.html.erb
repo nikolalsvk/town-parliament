@@ -18,7 +18,7 @@
       <tr>
         <td><%= act.name %></td>
         <td><input type="number" min="-100" max="100"></td>
-        <td><%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, act) %></td>
+        <td><%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, pages_meeting_path(act)) %></td>
         <td><%= link_to('<button type="button" class="btn btn-danger">Refuse</button>'.html_safe, act, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
       </tr>
     <% end %>

@@ -5,6 +5,7 @@
 <table class="table table-striped">
   <thead>
     <th style="width: 70%">Act name</th>
+    <th style="width: 5%">Approved</th>
     <th style="width: 5%">Show</th>
     <th style="width: 5%">Edit</th>
   </thead>
@@ -13,6 +14,11 @@
 
       <tr>
         <td><%= act.name %></td>
+        <% if act.status %>
+          <td><a class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></a></td>
+        <% else %>
+            <td><a class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+        <% end %>
         <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, act) %></td>
         <td><%= link_to('<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_act_path(act)) %></td>
        </tr>

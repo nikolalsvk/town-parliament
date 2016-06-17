@@ -6,6 +6,13 @@ class PagesController < ApplicationController
   end
 
   def meeting
+    unless params[:format].nil?
+      @akt = Act.find(params[:format])
+      @akt.status = "approved"
+      @akt.save
+      redirect_to @akt, notice: 'Act was successfully approved.'
+    end
+    
     @meeting = Meeting.find(1)
     @meeting.status = params[:status] if params[:status]
     @meeting.save
