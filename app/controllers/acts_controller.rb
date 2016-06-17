@@ -56,14 +56,15 @@ class ActsController < ApplicationController
     @act = Act.new(act_params)
 
     if @act.save
-      act_xml = Transform::ToXml.transform(@act)
+      session[:heads].each do |head_id|
+        Head.find_by_id(head_id).update(act_id: @act.id)
+      end
+
+      act_xml = Transform::ToXml.transform(@act).to_s
 
       mark_logic = Connection::MarkLogic.new
       mark_logic.upload_act(@act, act_xml)
 
-      session[:heads].each do |head_id|
-        Head.find_by_id(head_id).update(act_id: @act.id)
-      end
       redirect_to @act, notice: 'Act was successfully created.'
     else
       render :new
