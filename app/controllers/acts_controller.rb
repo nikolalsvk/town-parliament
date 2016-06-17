@@ -14,12 +14,13 @@ class ActsController < ApplicationController
   # GET /acts/1
   def show
     @akt = Act.find(params[:id])
-    @aktlink = "http://147.91.177.194:8000/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml"
+    @aktlink = "http://147.91.177.194:8000#{Connection::MarkLogic.new.acts_uri(@akt)}"
 
     mark_logic = Connection::MarkLogic.new
     act_from_ml = mark_logic.download_act(@akt)
-
     @act = Nokogiri::XML(act_from_ml)
+  rescue
+    @act = Transform::ToXml.transform(@akt)
   end
 
   # GET /acts/new

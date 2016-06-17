@@ -1,28 +1,28 @@
-  <style>  
-    p {
+<style>
+p {
 
-      text-indent: 2.0em; 
-    }
-    div.wow {
-      border-style: ridge;
-    }  
-  </style>
+  text-indent: 2.0em;
+}
+div.wow {
+  border-style: ridge;
+}
+</style>
 <div class="wow">
-<h1><%= @act.name %></h1>
-<p>Drzava: <strong><%= @act.state %></strong></p>
-<p> Grad: <strong><%= @act.city %></strong></p>
-<p>Datum: <strong><%= @act.date %></strong></p>
-<p>Preambula: <strong><%= @act.preambula %></strong></p>
-<br>
-<% @act.heads.each do |head| %>
-  <div class="wow">
-  <h2>Glava</h2>
-  <ul>
-    <li>Naziv: <strong><%= head.name %></strong></li>
-    <li>Kategorija: <strong><%= head.category %></strong></li>
-  </ul>
-  <% head.regulations.each do |regulation| %>
+  <h1><%= @act.name %></h1>
+  <p>Drzava: <strong><%= @act.state %></strong></p>
+  <p> Grad: <strong><%= @act.city %></strong></p>
+  <p>Datum: <strong><%= @act.date %></strong></p>
+  <p>Preambula: <strong><%= @act.preambula %></strong></p>
+  <br>
+  <% @act.heads.each do |head| %>
     <div class="wow">
+    <h2>Glava</h2>
+    <ul>
+      <li>Naziv: <strong><%= head.name %></strong></li>
+      <li>Kategorija: <strong><%= head.category %></strong></li>
+    </ul>
+    <% head.regulations.each do |regulation| %>
+      <div class="wow">
       <h3>Odredba</h3>
       <ul>
         <li>Naziv: <strong><%= regulation.name %></strong></li>
@@ -30,56 +30,56 @@
       </ul>
       <% regulation.subjects.each do |subject| %>
         <div class="wow">
-          <h4>Predmet</h4>
+        <h4>Predmet</h4>
+        <ul>
+          <li>Naziv: <strong><%= subject.name %></strong></li>
+        </ul>
+        <% subject.clauses.each do |clause| %>
+          <div class="wow">
+          <h5>Clan</h5>
           <ul>
-            <li>Naziv: <strong><%= subject.name %></strong></li>
+            <li>Naziv: <strong><%= clause.name %></strong></li>
           </ul>
-          <% subject.clauses.each do |clause| %>
+          <% clause.stances.each do |stance|%>
             <div class="wow">
-              <h5>Clan</h5>
-              <ul>
-                <li>Naziv: <strong><%= clause.name %></strong></li>
-              </ul>
-              <% clause.stances.each do |stance|%>
+            <h5>Stav</h5>
+            <ul>
+              <li>Naziv: <strong><%= stance.name %></strong></li>
+              <li>Sadrzaj: <strong><%= stance.content %></strong></li>
+            </ul>
+            <% stance.dots.each do |dot| %>
               <div class="wow">
-                <h5>Stav</h5>
+              <h5>Tacka</h5>
+              <ul>
+                <li>Naziv: <strong><%= dot.name %></strong></li>
+                <li>Sadrzaj: <strong><%= dot.content %></strong></li>
+              </ul>
+              <% dot.subdots.each do |subdot| %>
+                <div class="wow">
+                <h5>Podtacka</h5>
                 <ul>
-                  <li>Naziv: <strong><%= stance.name %></strong></li>
-                  <li>Sadrzaj: <strong><%= stance.content %></strong></li>
+                  <li>Naziv: <strong><%= subdot.name %></strong></li>
+                  <li>Sadrzaj: <strong><%= subdot.content %></strong></li>
                 </ul>
-                <% stance.dots.each do |dot| %>
+                <% subdot.paragraphs.each do |paragraph| %>
                   <div class="wow">
-                    <h5>Tacka</h5>
-                    <ul>
-                      <li>Naziv: <strong><%= dot.name %></strong></li>
-                      <li>Sadrzaj: <strong><%= dot.content %></strong></li>
-                    </ul>
-                    <% dot.subdots.each do |subdot| %>
-                      <div class="wow">
-                        <h5>Podtacka</h5>
-                        <ul>
-                          <li>Naziv: <strong><%= subdot.name %></strong></li>
-                          <li>Sadrzaj: <strong><%= subdot.content %></strong></li>
-                        </ul>
-                        <% subdot.paragraphs.each do |paragraph| %>
-                          <div class="wow">
-                            <h5>Paragraf</h5>
-                            <ul>
-                              <li>Naziv: <strong><%= paragraph.name %></strong></li>
-                              <li>Sadrzaj: <strong><%= paragraph.content %></strong></li>
-                            </ul>
-                          </div>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>
+                  <h5>Paragraf</h5>
+                  <ul>
+                    <li>Naziv: <strong><%= paragraph.name %></strong></li>
+                    <li>Sadrzaj: <strong><%= paragraph.content %></strong></li>
+                  </ul>
+                </div>
               <% end %>
+              </div>
+            <% end %>
             </div>
           <% end %>
+          </div>
+        <% end %>
         </div>
       <% end %>
+      </div>
+    <% end %>
     </div>
   <% end %>
   </div>
