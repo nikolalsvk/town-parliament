@@ -53,6 +53,6 @@ class AmandmentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def amandment_params
-      params[:amandment]
+      params.require(:amandment).permit(:date, :content, :explanation, :rating, :act_id, :owner_id)
     end
 end

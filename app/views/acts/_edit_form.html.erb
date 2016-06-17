@@ -1,4 +1,15 @@
-<%= form_for @act, html: { class:"form-horizontal" } do |f| %>
+<script>
+  $(document).ready(function(){
+    $('input[type="submit"][value="Update Act"]').click( function(e){
+      if(!$('#new_amandment')[0].checkValidity()){
+        e.preventDefault();
+        alert("Potrebno je popuniti sva polja vezana za amandman!");
+      }
+    });
+  });
+</script>
+
+<%= form_for @act, html: { class:"form-horizontal" }, remote:true do |f| %>
   <% if @act.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@act.errors.count, "error") %> prohibited this act from being saved:</h2>
@@ -56,6 +67,51 @@
     <%= f.submit %>
   </div>
 
+<% end %>
+
+
+<%= form_for @amandment, html: { class:"form-horizontal" } do |fa| %>
+  <% if @amandment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@amandment.errors.count, "error") %> prohibited this amandment from being saved:</h2>
+
+      <ul>
+      <% @amandment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textinput">Datum Amandmana</label>  
+    <div class="col-md-4">
+    <%= fa.date_select :date, class: "form-control input-md", required: true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textarea">Sadrzaj Amandmana</label>
+    <div class="col-md-4">                     
+      <%= fa.text_area :content, class: "form-control input-md", required: true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textarea">Objasnjenje Amandmana</label>
+    <div class="col-md-4">                     
+      <%= fa.text_area :explanation, class: "form-control input-md", required: true %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-4 control-label" for="textarea">Rejting Amandmana</label>
+    <div class="col-md-4">                     
+      <%= fa.number_field :rating, class: "form-control input-md", required: true, min:0, value:0 %>
+    </div>
+  </div>
+  <%= fa.hidden_field :act_id, value: @act.id %>
+  <%= fa.hidden_field :owner_id %>
 
 <% end %>
 
@@ -115,7 +171,7 @@
 
   <div class="row">
     <div class="col-md-8 col-md-offset-4 end-heads-place">
-    <% if intro_head %>
+    <% if end_head %>
       <%= render partial: "head_info", locals: { "@head": end_head } %>
     <% end %>
     </div>
