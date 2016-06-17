@@ -31,6 +31,7 @@ class ActsController < ApplicationController
 
   # GET /acts/1/edit
   def edit
+    @amandment = Amandment.new
   end
 
   # POST /acts
@@ -50,8 +51,15 @@ class ActsController < ApplicationController
   # HEAD STUFF
 
   def create_head_intro
+    if params[:head][:act_id]
+      @head = Head.create(category: params[:head][:category], 
+                        name: params[:head][:name],
+                        act_id: params[:head][:act_id])
+    
+    else
     @head = Head.create(category: params[:head][:category], 
                         name: params[:head][:name])
+    end
     add_head_id(@head.id)    
     respond_to do |format|
       format.js
@@ -251,10 +259,17 @@ class ActsController < ApplicationController
 
   # PATCH/PUT /acts/1
   def update
-    if @act.update(act_params)
-      redirect_to @act, notice: 'Act was successfully updated.'
-    else
-      render :edit
+    # if @act.update(act_params)
+    #   redirect_to @act, notice: 'Act was successfully updated.'
+    # else
+    #   render :edit
+    # end
+    @act_new = @act.dup
+    @act_new.save
+    @act_new.update(act_params)
+    
+    respond_to do |format|
+      format.js
     end
   end
 
