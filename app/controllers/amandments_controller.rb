@@ -46,6 +46,7 @@ class AmandmentsController < ApplicationController
 
   # DELETE /amandments/1
   def destroy
+    client.send_corona_request("/v1/documents?database=Tim22&uri=/amandments/amandment_#{@amandment.id}.xml", :delete)
     @amandment.destroy
     redirect_to amandments_url, notice: 'Amandment was successfully destroyed.'
   end

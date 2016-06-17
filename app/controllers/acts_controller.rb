@@ -318,6 +318,11 @@ class ActsController < ApplicationController
 
     client = Connection::MarkLogic.new.client
 
+    @act.amandments.each do |amandment|
+      client.send_corona_request("/v1/documents?database=Tim22&uri=/amandments/amandment_#{amandment.owner_id}.xml", :delete)
+      Act.find(amandment.owner_id).destroy
+    end
+
     client.send_corona_request("/v1/documents?database=Tim22&uri=/acts/act_#{@akt.id}.xml", :delete)
 
     @act.destroy
