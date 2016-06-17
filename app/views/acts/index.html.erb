@@ -23,6 +23,7 @@
         <% end %>
         <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, act) %></td>
         <td><%= link_to('<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_act_path(act)) %></td>
+        <td><%= link_to('<button type="button" class="btn btn-danger">Destroy</button>'.html_safe, act, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
         <td> <%= link_to "HTML", act_html_path(act), class:"btn btn-info" %> </td>
         <td> <%= link_to "PDF", act_pdf_path(act) <<'.pdf', class:"btn btn-warning", :target => "_blank" %> </td>
        </tr>

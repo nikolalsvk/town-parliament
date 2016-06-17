@@ -4,12 +4,10 @@ class ActsController < ApplicationController
 
   # GET /acts
   def index
-    if current_user.assembly_president?
-      @acts = Act.all
-    elsif current_user.alderman?
-      @acts = Act.where(:user_id => current_user.id)
-    else current_user.citizen?
+    if current_user.citizen?
       @acts = Act.where(:status => "approved")
+    else
+      @acts = Act.all
     end
   end
 
@@ -17,9 +15,11 @@ class ActsController < ApplicationController
   def show
     @akt = Act.find(params[:id])
     @aktlink = "http://147.91.177.194:8000/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml"
-    @client = Connection::MarkLogic.client
-    @act = @client.send_corona_request("/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml")
-    @act  = Nokogiri::XML(@act)
+
+    mark_logic = Connection::MarkLogic.new
+    act_from_ml = mark_logic.download_act(@akt)
+
+    @act = Nokogiri::XML(act_from_ml)
   end
 
   # GET /acts/new
@@ -55,6 +55,11 @@ class ActsController < ApplicationController
     @act = Act.new(act_params)
 
     if @act.save
+      act_xml = Transform::ToXml.transform(@act)
+
+      mark_logic = Connection::MarkLogic.new
+      mark_logic.upload_act(@act, act_xml)
+
       session[:heads].each do |head_id|
         Head.find_by_id(head_id).update(act_id: @act.id)
       end
@@ -68,15 +73,15 @@ class ActsController < ApplicationController
 
   def create_head_intro
     if params[:head][:act_id]
-      @head = Head.create(category: params[:head][:category], 
+      @head = Head.create(category: params[:head][:category],
                         name: params[:head][:name],
                         act_id: params[:head][:act_id])
-    
+
     else
-    @head = Head.create(category: params[:head][:category], 
+    @head = Head.create(category: params[:head][:category],
                         name: params[:head][:name])
     end
-    add_head_id(@head.id)    
+    add_head_id(@head.id)
     respond_to do |format|
       format.js
     end
@@ -95,7 +100,7 @@ class ActsController < ApplicationController
 
   def prepare_regulation
     @head = Head.find_by_id(params[:id])
-    
+
     respond_to do |format|
       format.js
     end
@@ -121,7 +126,7 @@ class ActsController < ApplicationController
 
   def prepare_subject
     @regulation = Regulation.find_by_id(params[:id])
-    
+
     respond_to do |format|
       format.js
     end
@@ -335,14 +340,14 @@ class ActsController < ApplicationController
   # DELETE /acts/1
   def destroy
     @akt = Act.find(params[:id])
-    @client = Connection::MarkLogic.client
-    @client.send_corona_request("/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml", :delete)
+    client = Connection::MarkLogic.new.client
+    client.send_corona_request("/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml", :delete)
     @act.destroy
     redirect_to acts_url, notice: 'Act was successfully destroyed.'
   end
 
   private
-  
+
   # Use callbacks to share common setup or constraints between actions.
   def set_act
     @act = Act.find(params[:id])
@@ -350,7 +355,7 @@ class ActsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def act_params
-    params.require(:act).permit(:state, :name, :city, :date, :preambula)  
+    params.require(:act).permit(:state, :name, :city, :date, :preambula)
   end
 
   def to_s
