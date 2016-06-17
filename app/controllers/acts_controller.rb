@@ -34,6 +34,13 @@ class ActsController < ApplicationController
     @amandment = Amandment.new
   end
 
+  def html
+    @act = Act.find_by_id(params[:act_id])
+  end
+
+  def pdf
+  end
+
   # POST /acts
   def create
     @act = Act.new(act_params)
