@@ -275,14 +275,57 @@ class ActsController < ApplicationController
 
   # PATCH/PUT /acts/1
   def update
-    # if @act.update(act_params)
-    #   redirect_to @act, notice: 'Act was successfully updated.'
-    # else
-    #   render :edit
-    # end
     @act_new = @act.dup
     @act_new.save
     @act_new.update(act_params)
+    
+    @act.heads.each do |head|
+      head_new = head.dup
+      head_new.act_id = @act_new.id
+      head_new.save!
+
+      head.regulations.each do |regulation|
+        regulation_new = regulation.dup
+        regulation_new.head_id = head_new.id
+        regulation_new.save!
+
+        regulation.subjects.each do |subject|
+          subject_new = subject.dup
+          subject_new.regulation_id = regulation_new.id
+          subject_new.save!
+
+          subject.clauses.each do |clause|
+            clause_new = clause.dup
+            clause_new.subject_id = subject_new.id
+            clause_new.save!
+
+            clause.stances.each do |stance|
+              stance_new = stance.dup
+              stance_new.clause_id = clause_new.id
+              stance_new.save!
+
+              stance.dots.each do |dot|
+                dot_new = dot.dup
+                dot_new.stance_id = stance_new.id
+                dot_new.save!
+
+                dot.subdots.each do |subdot|
+                  subdot_new = subdot.dup
+                  subdot_new.dot_id = dot_new.id
+                  subdot_new.save!
+
+                  subdot.paragraphs.each do |paragraph|
+                    paragraph_new = paragraph.dup
+                    paragraph_new.subdot_id = subdot_new.id
+                    paragraph_new.save!
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
     
     respond_to do |format|
       format.js
