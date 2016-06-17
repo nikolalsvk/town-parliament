@@ -5,5 +5,52 @@
 <h6><textarea class="form-control" rows="20"><%= @act %></textarea></h6>
 
 <%= link_to('<button type="button" class="btn btn-primary">Show as XML</button>'.html_safe, @aktlink) %>
-<%= link_to('<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_act_path(@act)) %>
+<%= link_to('<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_act_path(@akt)) %>
 <%= link_to('<button type="button" class="btn btn-success">Back</button>'.html_safe, acts_path) %>
+
+<% if @akt.amandments.empty? || current_user.citizen? %>
+  <h1>No amandment for this act</h1>
+<% else %>
+  <h1>Listing Amandments for this act</h1>
+
+  <table class="table table-striped">
+    <thead>
+    <th style="width: 70%">Amandment name</th>
+    <th style="width: 70%">Act name</th>
+    <th style="width: 70%">Show Act</th>
+    <th style="width: 5%">Votes</th>
+    <th style="width: 5%">Approve</th>
+    <th style="width: 5%">Refuse</th>
+    <th style="width: 5%">Show</th>
+    </thead>
+    <tbody>
+    <% @akt.amandments.each do |amandment| %>
+        <tr>
+          <td><%= amandment.explanation %></td>
+          <td><%= amandment.act.name %></td>
+          <td><%= link_to('<button type="button" class="btn btn-info">Show Act</button>'.html_safe, amandment.act) %></td>
+          <td><input type="number" min="-100" max="100"></td>
+          <td>
+          <% if current_user.assembly_president? %>
+            <% unless amandment.status == "approved" %>
+              <% if amandment.act.status == "approved" %>
+
+                <%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, pages_meeting_path(:amandman => amandment, :akt_id => amandment.act)) %>
+
+              <% else %>
+
+                <%= link_to('<button type="button" class="btn btn-primary disabled">Approve</button>'.html_safe) %>
+                <td><%= link_to('<button type="button" class="btn btn-danger">Refuse</button>'.html_safe, amandment, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
+
+              <% end %>
+            <% end %>
+          <% else %>
+            <td></td>
+          <% end %>
+          </td>
+          <td><%= link_to('<button type="button" class="btn btn-info">Show</button>'.html_safe, amandment) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

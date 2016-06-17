@@ -22,33 +22,33 @@
   <% end %>
 
   <!-- star from here -->
-  
+
   <!-- ACT -->
 
   <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Drzava</label>  
+    <label class="col-md-4 control-label" for="textinput">Drzava</label>
     <div class="col-md-4">
     <%= f.text_field :state, class: "form-control input-md", required: true %>
    </div>
   </div>
-  
+
   <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Naziv</label>  
+    <label class="col-md-4 control-label" for="textinput">Naziv</label>
     <div class="col-md-4">
     <%= f.text_field :name, class: "form-control input-md", required: true %>
     </div>
   </div>
-  
+
   <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Grad</label>  
+    <label class="col-md-4 control-label" for="textinput">Grad</label>
     <div class="col-md-4">
       <%= f.text_field :city, class: "form-control input-md", required: true %>
     </div>
   </div>
-  
+
   <div class="form-group">
     <label class="col-md-4 control-label" >Datum</label>
-    <div class="col-md-4">                     
+    <div class="col-md-4">
       <div class='input-group date' id='datetimepicker1'>
         <%= f.date_select(:date, :order => [:day, :month, :year], required: true) %>
       </div>
@@ -57,14 +57,14 @@
 
   <div class="form-group">
     <label class="col-md-4 control-label" for="textarea">Preambula</label>
-    <div class="col-md-4">                     
+    <div class="col-md-4">
       <%= f.text_area :preambula, class: "form-control input-md", required: true %>
     </div>
   </div>
 
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", :class => "btn btn-default" %>
   </div>
 
 <% end %>
@@ -84,7 +84,7 @@
   <% end %>
 
   <div class="form-group">
-    <label class="col-md-4 control-label" for="textinput">Datum Amandmana</label>  
+    <label class="col-md-4 control-label" for="textinput">Datum Amandmana</label>
     <div class="col-md-4">
     <%= fa.date_select :date, class: "form-control input-md", required: true %>
     </div>
@@ -92,21 +92,21 @@
 
   <div class="form-group">
     <label class="col-md-4 control-label" for="textarea">Sadrzaj Amandmana</label>
-    <div class="col-md-4">                     
+    <div class="col-md-4">
       <%= fa.text_area :content, class: "form-control input-md", required: true %>
     </div>
   </div>
 
   <div class="form-group">
     <label class="col-md-4 control-label" for="textarea">Objasnjenje Amandmana</label>
-    <div class="col-md-4">                     
+    <div class="col-md-4">
       <%= fa.text_area :explanation, class: "form-control input-md", required: true %>
     </div>
   </div>
 
   <div class="form-group">
     <label class="col-md-4 control-label" for="textarea">Rejting Amandmana</label>
-    <div class="col-md-4">                     
+    <div class="col-md-4">
       <%= fa.number_field :rating, class: "form-control input-md", required: true, min:0, value:0 %>
     </div>
   </div>
@@ -177,13 +177,7 @@
     </div>
   </div>
 
-
-
-
-
-
   <%= render "head_introduction_modal" %>
   <%= render "head_main_modal" %>
   <%= render "head_end_modal" %>
   <div class="modal-place"></div>
-
