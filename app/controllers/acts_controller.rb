@@ -18,10 +18,6 @@ class ActsController < ApplicationController
     @akt = Act.find(params[:id])
     @aktlink = "http://147.91.177.194:8000/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml"
     @client = Connection::MarkLogic.client
-    @akt_xml = Transform::ToXml.transform(@akt)
-
-    @client.send_corona_request("/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml", :put, @akt_xml.to_s)
-
     @act = @client.send_corona_request("/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml")
     @act  = Nokogiri::XML(@act)
   end
@@ -29,6 +25,7 @@ class ActsController < ApplicationController
   # GET /acts/new
   def new
     @act = Act.new
+    @meeting = Meeting.find(1)
     intit_heads
   end
 

@@ -16,9 +16,13 @@ class PagesController < ApplicationController
     unless params[:amandman].nil?
       @amandman = Amandment.find(params[:amandman])
       @akt = Act.find(params[:akt_id])
+      @akt_new = Act.find(@amandman.owner_id)
+      @client = Connection::MarkLogic.client
+      @akt_xml = Transform::ToXml.transform(@akt_new)
+      @client.send_corona_request("/v1/documents?database=Tim22&uri=/test/#{@akt.name}.xml", :put, @akt_xml.to_s)
       @amandman.status = "approved"
       @amandman.save
-      redirect_to @amandman, notice: 'Amandman was successfully approved.'
+      redirect_to @akt, notice: 'Amandman was successfully approved.'
     end
 
     @meeting = Meeting.find(1)
@@ -28,4 +32,13 @@ class PagesController < ApplicationController
     @amandments = Amandment.all
   end
 
+  private
+
+  def to_s
+    if @document
+      @document.to_xml(:save_with => Nokogiri::XML::Node::SaveOptions::NO_DECLARATION)
+    else
+      super.to_s
+    end
+  end
 end

@@ -1,5 +1,5 @@
 <h1>New Amandment</h1>
-
-<%= render 'form' %>
-
+<% if !@meeting.status? %>
+  <%= render 'form' %>
+<% end %>
 <%= link_to('<button type="button" class="btn btn-success">Back</button>'.html_safe, amandments_path) %>

@@ -38,7 +38,11 @@
       <tr>
         <td><%= amandment.explanation %></td>
         <td><input type="number" min="-100" max="100"></td>
-        <td><%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, pages_meeting_path(:amandman => amandment, :akt_id => amandment.act)) %></td>
+        <% if Act.find(amandment.act).status == "approved" %>
+          <td><%= link_to('<button type="button" class="btn btn-primary">Approve</button>'.html_safe, pages_meeting_path(:amandman => amandment, :akt_id => amandment.act)) %></td>
+        <% else %>
+          <td><%= link_to('<button type="button" class="btn btn-primary disabled">Approve</button>'.html_safe) %></td>
+        <% end %>
         <td><%= link_to('<button type="button" class="btn btn-danger">Refuse</button>'.html_safe, amandment, method: :delete, data: { confirm: 'Are you sure?' }) %></td>
       </tr>
   <% end %>
